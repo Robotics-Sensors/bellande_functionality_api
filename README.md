@@ -4,7 +4,7 @@
 
 
 # ROS1 Launch 
-- roslaunch my_launch.py
+- roslaunch bellande_step_api_2d_launch.py
 
 # ROS2 Launch
-- ros2 launch my_launch.py
+- ros2 launch bellande_step_api_2d_launch.py
