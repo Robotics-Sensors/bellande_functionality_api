@@ -1,10 +1,11 @@
 import json
 import os
 import requests
+import sys
 
 def main():
     # Read configuration from config.json
-    with open('config.json', 'r') as config_file:
+    with open(os.path.join(sys.path[0], 'config.json'), 'r') as config_file:
         config = json.load(config_file)
         url = config['url']
         endpoint_path = config['endpoint_path']

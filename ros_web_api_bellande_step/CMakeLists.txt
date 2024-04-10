@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 project(ros_web_api_bellande_step)
 
-## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
-
 # Find ROS
 if($ENV{ROS_VERSION} EQUAL 1)
   find_package(catkin REQUIRED COMPONENTS
