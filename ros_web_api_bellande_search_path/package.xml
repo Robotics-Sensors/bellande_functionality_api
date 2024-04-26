@@ -17,12 +17,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 <?xml version="1.0"?>
 <package format="3">
-  <name>ros_web_api_bellande_step</name>
+  <name>ros_web_api_bellande_search_path</name>
   <version>0.0.1</version>
   <description>Bellande ROS/ROS2 package with a JSON config file for making HTTP requests</description>
   <author email="ronaldsonbellande@gmail.com">Ronaldson Bellande</author>
   <maintainer email="ronaldsonbellande@gmail.com">Ronaldson Bellande</maintainer>
-  <license>GNU General Public License v3.0</license>
+  <license>Apache License 2.0</license>
 
 
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
