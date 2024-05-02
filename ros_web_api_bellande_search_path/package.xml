@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
 Copyright (C) 2024 Bellande Robotics Sensors Research Innovation Center, Ronaldson Bellande
 
@@ -14,8 +15,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
-
-<?xml version="1.0"?>
 <package format="3">
   <name>ros_web_api_bellande_search_path</name>
   <version>0.0.1</version>
