@@ -49,3 +49,10 @@ elseif($ENV{ROS_VERSION} EQUAL "2")
     install(DIRECTORY config/ DESTINATION share/${PROJECT_NAME}/config)
     install(DIRECTORY launch/ DESTINATION share/${PROJECT_NAME}/launch)
 endif()
+
+# Install Python scripts for both ROS 1 and ROS 2
+catkin_install_python(
+  PROGRAMS
+  src/bellande_step_api_2d.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
