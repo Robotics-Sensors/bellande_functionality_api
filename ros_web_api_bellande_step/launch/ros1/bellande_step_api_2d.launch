@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="x1"/>
+    <arg name="y1"/>
+    <arg name="x2"/>
+    <arg name="y2"/>
+    <arg name="limit"/>
+
+    <node pkg="ros_web_api_bellande_step" type="bellande_step_api_2d.py" name="bellande_step_api_2d_node" output="screen">
+        <param name="x1" value="$(arg x1)"/>
+        <param name="y1" value="$(arg y1)"/>
+        <param name="x2" value="$(arg x2)"/>
+        <param name="y2" value="$(arg y2)"/>
+        <param name="limit" value="$(arg limit)"/>
+    </node>
+</launch>
