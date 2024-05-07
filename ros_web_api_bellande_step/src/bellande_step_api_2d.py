@@ -4,7 +4,7 @@ import requests
 
 def main():
     # Get the absolute path to the config file
-    config_file_path = os.path.join(os.path.dirname(__file__), '../config/config2d.json')
+    config_file_path = os.path.join(os.path.dirname(__file__), '../config/configs.json')
 
     # Check if the config file exists
     if not os.path.exists(config_file_path):
@@ -15,7 +15,7 @@ def main():
     with open(config_file_path, 'r') as config_file:
         config = json.load(config_file)
         url = config['url']
-        endpoint_path = config['endpoint_path']
+        endpoint_path = config['endpoint_path']["2d"]
     
     # Get the parameters from the ROS parameter server
     x1 = rospy.get_param('x1')

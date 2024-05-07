@@ -1,0 +1,8 @@
+{
+  "url": "https://bellanderoboticssensorsresearchinnovationcenter-kot42qxp.b4a.run",
+  "endpoint_path": {
+    "prediction": "/api/Bellande_Speech_Detection/bellande_prediction",
+    "detection": "/api/Bellande_Speech_Detection/bellande_detection",
+    "segmentation": "/api/Bellande_Speech_Detection/bellande_segmentation"
+  }
+}

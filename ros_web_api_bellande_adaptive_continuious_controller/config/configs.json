@@ -1,0 +1,14 @@
+{
+  "url": "https://bellanderoboticssensorsresearchinnovationcenter-kot42qxp.b4a.run",
+  "endpoint_path": {
+    "2d": "/api/Bellande_Adaptive_Continuious_Controller/bellande_adaptive_continuious_controller_2d",
+    "3d": "/api/Bellande_Adaptive_Continuious_Controller/bellande_adaptive_continuious_controller_3d",
+    "4d": "/api/Bellande_Adaptive_Continuious_Controller/bellande_adaptive_continuious_controller_4d",
+    "5d": "/api/Bellande_Adaptive_Continuious_Controller/bellande_adaptive_continuious_controller_5d",
+    "6d": "/api/Bellande_Adaptive_Continuious_Controller/bellande_adaptive_continuious_controller_6d",
+    "7d": "/api/Bellande_Adaptive_Continuious_Controller/bellande_adaptive_continuious_controller_7d",
+    "8d": "/api/Bellande_Adaptive_Continuious_Controller/bellande_adaptive_continuious_controller_8d",
+    "9d": "/api/Bellande_Adaptive_Continuious_Controller/bellande_adaptive_continuious_controller_9d",
+    "10d": "/api/Bellande_Adaptive_Continuious_Controller/bellande_adaptive_continuious_controller_10d"
+  }
+}

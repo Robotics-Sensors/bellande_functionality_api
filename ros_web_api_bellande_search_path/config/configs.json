@@ -1,0 +1,14 @@
+{
+  "url": "https://bellanderoboticssensorsresearchinnovationcenter-kot42qxp.b4a.run",
+  "endpoint_path": {
+    "2d": "/api/Bellande_Search_Path/bellande_search_path_2d",
+    "3d": "/api/Bellande_Search_Path/bellande_search_path_3d",
+    "4d": "/api/Bellande_Search_Path/bellande_search_path_4d",
+    "5d": "/api/Bellande_Search_Path/bellande_search_path_5d",
+    "6d": "/api/Bellande_Search_Path/bellande_search_path_6d",
+    "7d": "/api/Bellande_Search_Path/bellande_search_path_7d",
+    "8d": "/api/Bellande_Search_Path/bellande_search_path_8d",
+    "9d": "/api/Bellande_Search_Path/bellande_search_path_9d",
+    "10d": "/api/Bellande_Search_Path/bellande_search_path_10d"
+  }
+}
