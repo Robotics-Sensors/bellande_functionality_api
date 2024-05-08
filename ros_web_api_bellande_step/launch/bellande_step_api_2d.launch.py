@@ -8,7 +8,7 @@ def ros1_launch_description():
     args = sys.argv[1:]
 
     # Construct the ROS 1 launch command
-    roslaunch_command = ["roslaunch", "ros_web_api_bellande_step", "bellande_step_api_2d.py"] + args
+    roslaunch_command = ["roslaunch", "ros_web_api_bellande_step", "bellande_step_api_2d.launch"] + args
 
     # Execute the launch command
     subprocess.call(roslaunch_command)

@@ -18,11 +18,11 @@ def main():
         endpoint_path = config['endpoint_path']["2d"]
     
     # Get the parameters from the ROS parameter server
-    x1 = rospy.get_param('x1')
-    y1 = rospy.get_param('y1')
-    x2 = rospy.get_param('x2')
-    y2 = rospy.get_param('y2')
-    limit = rospy.get_param('limit')
+    x1 = rospy.get_param('x1', 0)
+    y1 = rospy.get_param('y1', 0)
+    x2 = rospy.get_param('x2', 0)
+    y2 = rospy.get_param('y2', 0)
+    limit = rospy.get_param('limit', 3)
 
     # JSON payload
     payload = {
@@ -47,6 +47,7 @@ def main():
         response.raise_for_status()  # Raise an error for unsuccessful responses
         data = response.json()
         print("Next Step:", data['next_step'])
+    
     except requests.exceptions.RequestException as e:
         print("Error:", e)
 
@@ -55,6 +56,6 @@ if __name__ == '__main__':
     if ros_version == "1":
         import rospy
     elif ros_version == "2":
-        rclpy
+        import rclpy
 
     main()
