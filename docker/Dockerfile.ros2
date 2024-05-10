@@ -87,10 +87,10 @@ RUN cd $CATKIN_WS \
   && rosdep fix-permissions \
   && rosdep install -y --from-paths . --ignore-src --rosdistro ${ROS_VERSION}
 
-# Catkin Build
-RUN catkin build
+# Always source colcon_setup.sh when launching bash 
+COPY ../scripts/colcon_setup.sh /usr/local/bin/colcon_setup.sh
+RUN echo "source /usr/local/bin/colcon_setup.sh" >> /root/.bashrc
+RUN chmod +x /usr/local/bin/colcon_setup.sh
 
-# Source Catkin Setup
-RUN source "$CATKIN_WS/devel/setup.bash"
-
+ENTRYPOINT ["/usr/local/bin/colcon_setup.sh"]
 CMD ["bash"]
