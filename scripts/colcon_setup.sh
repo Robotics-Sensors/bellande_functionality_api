@@ -16,6 +16,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-catkin build 
-source "/opt/ros/noetic/setup.bash"
-source "$CATKIN_WS/devel/setup.bash"
+colcon build 
+source "/opt/ros/foxy/setup.bash"
+source "$CATKIN_WS/install/setup.bash"

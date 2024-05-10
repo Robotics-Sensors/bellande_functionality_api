@@ -84,5 +84,10 @@ RUN cd $CATKIN_WS \
   && rosdep fix-permissions \
   && rosdep install -y --from-paths . --ignore-src --rosdistro ${ROS_VERSION}
 
+# Always source catkin_setup.sh when launching bash 
+COPY ../scripts/catkin_setup.sh /usr/local/bin/catkin_setup.sh
+RUN echo "source /usr/local/bin/catkin_setup.sh" >> /root/.bashrc
+RUN chmod +x /usr/local/bin/catkin_setup.sh
+
 ENTRYPOINT ["/usr/local/bin/catkin_setup.sh"]
 CMD ["bash"]
