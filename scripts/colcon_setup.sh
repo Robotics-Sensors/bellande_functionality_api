@@ -17,5 +17,4 @@
 
 
 colcon build 
-source "/opt/ros/foxy/setup.bash"
-source "$CATKIN_WS/install/setup.bash"
+source "./install/setup.bash"

@@ -24,7 +24,7 @@ ENV PYTHON_VERSION="3.8"
 ARG ROS_ARCHITECTURE_VERSION_GIT_BRANCH=main
 ARG ROS_ARCHITECTURE_VERSION_GIT_COMMIT=HEAD
 
-ARG ROS_VERSION=noetic
+ENV ROS_VERSION=noetic
 ENV CATKIN_WS=/root/catkin_ws
 
 LABEL maintainer=ronaldsonbellande@gmail.com
@@ -71,7 +71,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends <requirements/r
 
 # Create local catkin workspace
 RUN mkdir -p $CATKIN_WS/src
-WORKDIR $CATKIN_WS/src
+
+# Copy Every Package
+COPY ../ ${CATKIN_WS}/src
+
+# Set the working directory for Catkin
+WORKDIR $CATKIN_WS
 
 # Initialize local catkin workspace, install dependencies and build workpsace
 RUN echo "source /opt/ros/${ROS_VERSION}/setup.bash" >> ~/.bashrc
@@ -90,4 +95,4 @@ RUN echo "source /usr/local/bin/catkin_setup.sh" >> /root/.bashrc
 RUN chmod +x /usr/local/bin/catkin_setup.sh
 
 ENTRYPOINT ["/usr/local/bin/catkin_setup.sh"]
-CMD ["bash"]
+CMD ["/bin/bash"]
