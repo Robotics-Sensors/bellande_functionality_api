@@ -1,0 +1,88 @@
+# Copyright (C) 2024 Bellande Robotics Sensors Research Innovation Center, Ronaldson Bellande
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+ARG ROS_ARCHITECTURE_VERSION=latest
+
+FROM ubuntu:20.04 as base_build
+SHELL [ "/bin/bash" , "-c" ]
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV PYTHON_VERSION="3.8"
+
+ARG ROS_ARCHITECTURE_VERSION_GIT_BRANCH=main
+ARG ROS_ARCHITECTURE_VERSION_GIT_COMMIT=HEAD
+
+ARG ROS_VERSION=noetic
+ENV CATKIN_WS=/root/catkin_ws
+
+LABEL maintainer=ronaldsonbellande@gmail.com
+LABEL author=ronaldsonbellande@gmail.com
+LABEL ROS_architecture_github_branchtag=${ROS_ARCHITECTURE_VERSION_GIT_BRANCH}
+LABEL ROS_architecture_github_commit=${ROS_ARCHITECTURE_VERSION_GIT_COMMIT}
+
+# Ubuntu setup
+RUN apt-get update -y
+RUN apt-get upgrade -y
+
+# Set the working directory inside the Docker image
+WORKDIR /
+
+# Create a directory for the requirements
+RUN mkdir -p /requirements
+
+# Copy specific files from the requirements directory to the "requirements" directory in the Docker image
+COPY ../requirements/requirements.txt /requirements/requirements.txt
+COPY ../requirements/system_requirements.txt /requirements/system_requirements.txt
+COPY ../requirements/ros_requirements.txt /requirements/ros_requirements.txt
+COPY ../requirements/ros_repository_requirements.txt /requirements/ros_repository_requirements.txt
+
+# Install dependencies for system
+RUN apt-get update && apt-get install -y --no-install-recommends <requirements/system_requirements.txt\
+  && apt-get upgrade -y \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+# Install python 3.8 and make primary 
+RUN apt-get update && apt-get install -y \
+  python3.8 python3.8-dev python3-pip python3.8-venv \
+  && update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
+
+# Pip install update 
+RUN pip3 install --upgrade pip
+
+# Install python libraries
+RUN pip --no-cache-dir install -r requirements/requirements.txt
+
+# Install dependencies for ros system 
+RUN apt-get update && apt-get install -y --no-install-recommends <requirements/ros_requirements.txt \
+  && rm -rf /var/lib/apt/lists/*
+
+# Create local catkin workspace
+RUN mkdir -p $CATKIN_WS/src
+WORKDIR $CATKIN_WS/src
+
+# Initialize local catkin workspace, install dependencies and build workpsace
+RUN echo "source /opt/ros/${ROS_VERSION}/setup.bash" >> ~/.bashrc
+RUN source ~/.bashrc
+
+RUN cd $CATKIN_WS \
+  && rosdep init \
+  && rosdep update \
+  && rosdep update --rosdistro ${ROS_VERSION} \
+  && rosdep fix-permissions \
+  && rosdep install -y --from-paths . --ignore-src --rosdistro ${ROS_VERSION}
+
+ENTRYPOINT ["/usr/local/bin/catkin_setup.sh"]
+CMD ["bash"]

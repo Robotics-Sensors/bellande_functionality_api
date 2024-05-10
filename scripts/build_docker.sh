@@ -15,14 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+# Get the directory of the script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Check user input
 if [ "$1" = "ros1" ]; then
     # Define the Dockerfile name and tag for ROS 1
-    DOCKERFILE="../Dockerfile/Dockerfile.ros1"
+    DOCKERFILE="$DIR/../docker/Dockerfile.ros1"
     IMAGE_NAME="bellande_api_configs_packages_ros1"
 elif [ "$1" = "ros2" ]; then
     # Define the Dockerfile name and tag for ROS 2
-    DOCKERFILE="../Dockerfile/Dockerfile.ros2"
+    DOCKERFILE="$DIR/../docker/Dockerfile.ros2"
     IMAGE_NAME="bellande_api_configs_packages_ros2"
 else
     echo "Invalid input. Please provide either 'ros1' or 'ros2'."
@@ -31,8 +34,11 @@ fi
 
 TAG="latest"  # Change this to the desired tag for your Docker image
 
+# Navigate to the directory containing the Dockerfile
+cd "$DIR/../docker" || exit
+
 # Build the Docker image
-docker build -t $IMAGE_NAME:$TAG -f $DOCKERFILE .
+docker build -t $IMAGE_NAME:$TAG -f $DOCKERFILE "$DIR/../"
 
 # Check if the image was built successfully
 if [ $? -eq 0 ]; then
