@@ -16,5 +16,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-colcon build 
-source "./install/setup.bash"
+# Build catkin workspace
+colcon build
+
+# Source workspace setup file
+source ${CATKIN_WS}/install/setup.bash

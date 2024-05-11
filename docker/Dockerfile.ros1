@@ -15,7 +15,7 @@
 
 ARG ROS_ARCHITECTURE_VERSION=latest
 
-FROM ubuntu:20.04 as base_build
+FROM ronaldsonbellande/bellande_robotic_environment:latest
 SHELL [ "/bin/bash" , "-c" ]
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -66,8 +66,12 @@ RUN pip3 install --upgrade pip
 RUN pip --no-cache-dir install -r requirements/requirements.txt
 
 # Install dependencies for ros system 
-RUN apt-get update && apt-get install -y --no-install-recommends <requirements/ros_requirements.txt \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends <requirements/ros_requirements.txt \
   && rm -rf /var/lib/apt/lists/*
+
+# Add /usr/bin to the PATH
+ENV PATH="/usr/bin:${PATH}"
 
 # Create local catkin workspace
 RUN mkdir -p $CATKIN_WS/src
@@ -81,6 +85,7 @@ WORKDIR $CATKIN_WS
 # Initialize local catkin workspace, install dependencies and build workpsace
 RUN echo "source /opt/ros/${ROS_VERSION}/setup.bash" >> ~/.bashrc
 RUN source ~/.bashrc
+RUN catkin config  --extend "/opt/ros/"${ROS_VERSION}"
 
 RUN cd $CATKIN_WS \
   && rosdep init \
@@ -94,5 +99,6 @@ COPY ../scripts/catkin_setup.sh /usr/local/bin/catkin_setup.sh
 RUN echo "source /usr/local/bin/catkin_setup.sh" >> /root/.bashrc
 RUN chmod +x /usr/local/bin/catkin_setup.sh
 
-ENTRYPOINT ["/usr/local/bin/catkin_setup.sh"]
+RUN /usr/local/bin/catkin_setup.sh
+
 CMD ["/bin/bash"]

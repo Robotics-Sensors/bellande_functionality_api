@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+# Build catkin workspace
 catkin build
-source "/root/catkin_ws/devel/setup.bash"
+
+# Source workspace setup file
+source devel/setup.bash
