@@ -32,47 +32,6 @@ LABEL author=ronaldsonbellande@gmail.com
 LABEL ROS_architecture_github_branchtag=${ROS_ARCHITECTURE_VERSION_GIT_BRANCH}
 LABEL ROS_architecture_github_commit=${ROS_ARCHITECTURE_VERSION_GIT_COMMIT}
 
-# Ubuntu setup
-RUN apt-get update -y
-RUN apt-get upgrade -y
-
-# Set the working directory inside the Docker image
-WORKDIR /
-
-# Create a directory for the requirements
-RUN mkdir -p /requirements
-
-# Copy specific files from the requirements directory to the "requirements" directory in the Docker image
-COPY ../requirements/requirements.txt /requirements/requirements.txt
-COPY ../requirements/system_requirements.txt /requirements/system_requirements.txt
-COPY ../requirements/ros_requirements.txt /requirements/ros_requirements.txt
-COPY ../requirements/ros_repository_requirements.txt /requirements/ros_repository_requirements.txt
-
-# Install dependencies for system
-RUN apt-get update && apt-get install -y --no-install-recommends <requirements/system_requirements.txt\
-  && apt-get upgrade -y \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-
-# Install python 3.8 and make primary 
-RUN apt-get update && apt-get install -y \
-  python3.8 python3.8-dev python3-pip python3.8-venv \
-  && update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
-
-# Pip install update 
-RUN pip3 install --upgrade pip
-
-# Install python libraries
-RUN pip --no-cache-dir install -r requirements/requirements.txt
-
-# Install dependencies for ros system 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends <requirements/ros_requirements.txt \
-  && rm -rf /var/lib/apt/lists/*
-
-# Add /usr/bin to the PATH
-ENV PATH="/usr/bin:${PATH}"
-
 # Create local catkin workspace
 RUN mkdir -p $CATKIN_WS/src
 
@@ -82,10 +41,20 @@ COPY ../ ${CATKIN_WS}/src
 # Set the working directory for Catkin
 WORKDIR $CATKIN_WS
 
+RUN export ROS_INSTALL_PATH=$(find / -name setup.bash -print)
+RUN ROS_VERSION=$(rosversion -d)
+
+# Print ROS installation path and version
+RUN echo "ROS installed in: $ROS_INSTALL_PATH"
+RUN echo "ROS version: $ROS_VERSION"
+
+# Initialize catkin workspace
+RUN catkin init \ 
+  && catkin config --cmake-args -DCATKIN_ENABLE_TESTING=0
+
 # Initialize local catkin workspace, install dependencies and build workpsace
 RUN echo "source /opt/ros/${ROS_VERSION}/setup.bash" >> ~/.bashrc
 RUN source ~/.bashrc
-RUN catkin config  --extend "/opt/ros/"${ROS_VERSION}"
 
 RUN cd $CATKIN_WS \
   && rosdep init \
