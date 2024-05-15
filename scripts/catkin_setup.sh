@@ -19,4 +19,4 @@
 catkin build
 
 # Source workspace setup file
-source devel/setup.bash
+source /opt/ros/overlay_ws/devel/setup.bash

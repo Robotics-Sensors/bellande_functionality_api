@@ -15,7 +15,7 @@
 
 ARG ROS_ARCHITECTURE_VERSION=latest
 
-FROM ronaldsonbellande/bellande_robotic_environment:latest
+FROM ronaldsonbellande/bellande_robotic_environment_ros1:latest
 SHELL [ "/bin/bash" , "-c" ]
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -25,41 +25,31 @@ ARG ROS_ARCHITECTURE_VERSION_GIT_BRANCH=main
 ARG ROS_ARCHITECTURE_VERSION_GIT_COMMIT=HEAD
 
 ENV ROS_VERSION=noetic
-ENV CATKIN_WS=/root/catkin_ws
+ENV CATKIN_WS=/opt/ros/overlay_ws
 
 LABEL maintainer=ronaldsonbellande@gmail.com
 LABEL author=ronaldsonbellande@gmail.com
 LABEL ROS_architecture_github_branchtag=${ROS_ARCHITECTURE_VERSION_GIT_BRANCH}
 LABEL ROS_architecture_github_commit=${ROS_ARCHITECTURE_VERSION_GIT_COMMIT}
 
-# Create local catkin workspace
+# Create local catkin workspace and # copy every package
 RUN mkdir -p $CATKIN_WS/src
-
-# Copy Every Package
-COPY ../ ${CATKIN_WS}/src
-
-# Set the working directory for Catkin
+COPY ../ ${CATKIN_WS}/src 
 WORKDIR $CATKIN_WS
 
-RUN export ROS_INSTALL_PATH=$(find / -name setup.bash -print)
-RUN ROS_VERSION=$(rosversion -d)
-
-# Print ROS installation path and version
-RUN echo "ROS installed in: $ROS_INSTALL_PATH"
-RUN echo "ROS version: $ROS_VERSION"
+# Set the working directory for catkin
 
 # Initialize catkin workspace
-RUN catkin init \ 
+RUN /bin/bash -c "source /opt/ros/$ROS_VERSION/setup.bash" \
+  && catkin init \
   && catkin config --cmake-args -DCATKIN_ENABLE_TESTING=0
 
 # Initialize local catkin workspace, install dependencies and build workpsace
-RUN echo "source /opt/ros/${ROS_VERSION}/setup.bash" >> ~/.bashrc
-RUN source ~/.bashrc
+RUN echo "source /opt/ros/${ROS_VERSION}/setup.bash" >> ~/.bashrc \
+  && source ~/.bashrc
 
 RUN cd $CATKIN_WS \
-  && rosdep init \
   && rosdep update \
-  && rosdep update --rosdistro ${ROS_VERSION} \
   && rosdep fix-permissions \
   && rosdep install -y --from-paths . --ignore-src --rosdistro ${ROS_VERSION}
 
@@ -68,6 +58,6 @@ COPY ../scripts/catkin_setup.sh /usr/local/bin/catkin_setup.sh
 RUN echo "source /usr/local/bin/catkin_setup.sh" >> /root/.bashrc
 RUN chmod +x /usr/local/bin/catkin_setup.sh
 
+# Run the packages and source
 RUN /usr/local/bin/catkin_setup.sh
-
 CMD ["/bin/bash"]
