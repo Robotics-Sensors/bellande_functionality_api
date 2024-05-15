@@ -15,7 +15,7 @@
 
 ARG ROS_ARCHITECTURE_VERSION=latest
 
-FROM ronaldsonbellande/bellande_robotic_environment_ros1:latest
+FROM ronaldsonbellande/bellande_robotic_environment_ros2:latest
 SHELL [ "/bin/bash" , "-c" ]
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -36,8 +36,6 @@ LABEL ROS_architecture_github_commit=${ROS_ARCHITECTURE_VERSION_GIT_COMMIT}
 RUN mkdir -p $CATKIN_WS/src
 COPY ../ ${CATKIN_WS}/src 
 WORKDIR $CATKIN_WS
-
-# Set the working directory for catkin
 
 # Initialize catkin workspace
 RUN /bin/bash -c "source /opt/ros/$ROS_VERSION/setup.bash" \
