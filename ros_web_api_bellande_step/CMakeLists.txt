@@ -39,6 +39,15 @@ if($ENV{ROS_VERSION} EQUAL 1)
   )
 endif()
 
+# Install Python scripts for both ROS 1
+if($ENV{ROS_VERSION} EQUAL 1)
+  catkin_install_python(
+    PROGRAMS
+    src/bellande_step_api_2d.py
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  )
+endif()
+
 # Install Python scripts, configuration files, and launch files
 if($ENV{ROS_VERSION} EQUAL "1")
     install(PROGRAMS src/bellande_step_api_2d.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
@@ -48,11 +57,5 @@ elseif($ENV{ROS_VERSION} EQUAL "2")
     install(PROGRAMS src/bellande_step_api_2d.py DESTINATION lib/${PROJECT_NAME})
     install(DIRECTORY config/ DESTINATION share/${PROJECT_NAME}/config)
     install(DIRECTORY launch/ DESTINATION share/${PROJECT_NAME}/launch)
+    ament_package()
 endif()
-
-# Install Python scripts for both ROS 1 and ROS 2
-catkin_install_python(
-  PROGRAMS
-  src/bellande_step_api_2d.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)

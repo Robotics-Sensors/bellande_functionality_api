@@ -14,7 +14,7 @@ The primary functionality of this API is to provide access to Bellande Algorithm
 
 ## 🐳 API
 - [![Bellande Step](https://img.shields.io/badge/Bellande%20API-Bellande/Step-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_robots_step)
-- [![Bellande Step](https://img.shields.io/badge/Bellande%20API-Bellande/Search%20Path-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_search_path)
+- [![Bellande Search Path](https://img.shields.io/badge/Bellande%20API-Bellande/Search%20Path-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_search_path)
 
 
 ## 💻 Usage
