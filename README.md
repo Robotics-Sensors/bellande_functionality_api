@@ -20,8 +20,8 @@ The primary functionality of this API is to provide access to Bellande Algorithm
 - [![Bellande Search Path](https://img.shields.io/badge/Bellande%20API-Bellande/Search%20Path-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_search_path)
 
 ## 💨 Bellande Model Format API/Application & Bellande Framework
-- [![Bellande Model Format](https://img.shields.io/badge/Bellande%20Model%20Format-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_model_format)
-- [![Bellande Framework](https://img.shields.io/badge/Bellande%20Model%20Framework-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_model_framework)
+- [![Bellande Model Format](https://img.shields.io/badge/Bellande%20Model%20Format-0099cc?style=for-the-badge)](https://github.com/Artificial-Intelligence-Computer-Vision/bellande_model_format)
+- [![Bellande Framework](https://img.shields.io/badge/Bellande%20Model%20Framework-0099cc?style=for-the-badge)](https://github.com/Artificial-Intelligence-Computer-Vision/bellande_model_framework)
 
 ## 💻 Usage
 To begin leveraging Bellande's algorithms in your projects, simply pull the Docker image and integrate the API into your robotic environment. Detailed instructions on how to deploy and utilize the API can be found in the provided documentation.
