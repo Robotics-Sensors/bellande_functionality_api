@@ -2,3 +2,5 @@ push.sh
 fix_errors.sh
 repository_recal.sh
 test.sh
+docker_publish.sh
+reset_docker.sh
