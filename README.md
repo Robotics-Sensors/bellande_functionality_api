@@ -16,8 +16,10 @@ The Bellande Algorithms Web ROS/ROS2 API serves as a gateway to utilize the soph
 The primary functionality of this API is to provide access to Bellande Algorithms. It acts as an intermediary, enabling communication between your application and Bellande's advanced algorithms. Whether you're working with ROS or ROS2, this API facilitates the utilization of Bellande's cutting-edge solutions in your robotic projects.
 
 ## 🐳 API
-- [![Bellande Step](https://img.shields.io/badge/Bellande%20API-Bellande/Step-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_robots_step)
-- [![Bellande Search Path](https://img.shields.io/badge/Bellande%20API-Bellande/Search%20Path-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_search_path)
+- [![Bellande Step](https://img.shields.io/badge/Bellande%20API-Bellande%20Step-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_robots_step)
+- [![Bellande Search Path](https://img.shields.io/badge/Bellande%20API-Bellande%20Search%20Path-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_search_path)
+- [![Bellande Alternate Path Creation](https://img.shields.io/badge/Bellande%20API-Bellande%20Alternate%20Path%20Creation-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_adaptive_alternate_path_creation)
+- [![Bellande Motion Probabilistic](https://img.shields.io/badge/Bellande%20API-Bellande%20Motion%Probabilistic-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_motion_probabilistic)
 
 ## 💨 Bellande Model Format API/Application & Bellande Framework
 - [![Bellande Model Format](https://img.shields.io/badge/Bellande%20Model%20Format-0099cc?style=for-the-badge)](https://github.com/Artificial-Intelligence-Computer-Vision/bellande_model_format)
