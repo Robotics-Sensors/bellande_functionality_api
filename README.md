@@ -19,7 +19,7 @@ The primary functionality of this API is to provide access to Bellande Algorithm
 - [![Bellande Step](https://img.shields.io/badge/Bellande%20API-Bellande%20Step-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_robots_step)
 - [![Bellande Search Path](https://img.shields.io/badge/Bellande%20API-Bellande%20Search%20Path-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_search_path)
 - [![Bellande Alternate Path Creation](https://img.shields.io/badge/Bellande%20API-Bellande%20Alternate%20Path%20Creation-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_adaptive_alternate_path_creation)
-- [![Bellande Motion Probabilistic](https://img.shields.io/badge/Bellande%20API-Bellande%20Motion%Probabilistic-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_motion_probabilistic)
+- [![Bellande Motion Probabilistic](https://img.shields.io/badge/Bellande%20API-Bellande%20Motion%20Probabilistic-0099cc?style=for-the-badge)](https://github.com/Robotics-Sensors/bellande_motion_probabilistic)
 
 ## 💨 Bellande Model Format API/Application & Bellande Framework
 - [![Bellande Model Format](https://img.shields.io/badge/Bellande%20Model%20Format-0099cc?style=for-the-badge)](https://github.com/Artificial-Intelligence-Computer-Vision/bellande_model_format)
