@@ -10,5 +10,6 @@
     "8d": "/api/Bellande_Step/bellande_step_8d",
     "9d": "/api/Bellande_Step/bellande_step_9d",
     "10d": "/api/Bellande_Step/bellande_step_10d"
-  }
+  },
+  "access_key": "bellande_web_api_opensource"
 }

@@ -5,5 +5,6 @@
     "object_detection": "/api/Bellande_2D_Computer_Vision/bellande_object_detection",
     "instance_segmentation": "/api/Bellande_2D_Computer_Vision/bellande_instance_segmentation",
     "sementic_segmentation": "/api/Bellande_2D_Computer_Vision/bellande_sementic_segmentation"
-  }
+  },
+  "access_key": "bellande_web_api_opensource"
 }
