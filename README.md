@@ -3,15 +3,17 @@
 # Benifits of Using the Bellande API's
 - Works in any framework
 - Works in any programming languages or scripting languages
+- Extremely Secure over HTTPS
 
 # Check Website All Information And Accessibility
 - [![Organization Website](https://img.shields.io/badge/Explore%20Our-Website-0099cc?style=for-the-badge)](https://robotics-sensors.github.io)
 - Checkout our research organization for information, information on this repository is limited as well as all the configs are demos
 
 ### 🔑 API USE
-- **Endpoint**: /Bellande_Model_Framework/bellande_model_framework_opensource
+- Each Bellande APi has there unique endpoint
 - **Default Assess Key for Model**: ``bellande_web_api_opensource``
-- 
+
+  
 ## Use the Web-ROS-API Docker Image  for your needs with the Bellande API
 - **ROS1**: [![ROS1 Docker Image](https://img.shields.io/docker/pulls/ronaldsonbellande/bellande_web_api_packages_ros1)](https://hub.docker.com/r/ronaldsonbellande/bellande_web_api_packages_ros1)
 - **ROS2**: [![ROS2 Docker Image](https://img.shields.io/docker/pulls/ronaldsonbellande/bellande_web_api_packages_ros2)](https://hub.docker.com/r/ronaldsonbellande/bellande_web_api_packages_ros2)
