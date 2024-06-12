@@ -2,6 +2,7 @@
   "url": "https://bellanderoboticssensorsresearchinnovationcenter-kot42qxp.b4a.run",
   "endpoint_path": {
     "prediction": "/api/Bellande_2D_Computer_Vision/bellande_classification_prediction",
+    "face_detection": "/api/Bellande_2D_Computer_Vision/bellande_face_detection",
     "object_detection": "/api/Bellande_2D_Computer_Vision/bellande_object_detection",
     "instance_segmentation": "/api/Bellande_2D_Computer_Vision/bellande_instance_segmentation",
     "sementic_segmentation": "/api/Bellande_2D_Computer_Vision/bellande_sementic_segmentation"
