@@ -12,7 +12,7 @@ def ros1_launch_description():
     args = sys.argv[1:]
 
     # Construct the ROS 1 launch commandi
-    roslaunch_command = ["roslaunch", "ros_web_api_bellande_2d_computer_vision", "bellande_2d_computer_vision_prediction.launch"] + args
+    roslaunch_command = ["roslaunch", "ros_web_api_bellande_2d_computer_vision", "bellande_2d_computer_vision_face_detection.launch"] + args
 
     roslaunch_command.extend([
         "usb_cam", "usb_cam_node", "name:=camera",
@@ -25,7 +25,7 @@ def ros1_launch_description():
     ])
     
     roslaunch_command.extend([
-        "ros_web_api_bellande_2d_computer_vision", "bellande_2d_computer_vision_prediction.py", "name:=prediction_node"
+        "ros_web_api_bellande_2d_computer_vision", "bellande_2d_computer_vision_face_detection.py", "name:=face_detection_node"
     ])
     
     roslaunch_command.extend([
@@ -58,7 +58,7 @@ def ros2_launch_description():
     
     nodes_to_launch.append(Node(
         package='ros_web_api_bellande_2d_computer_vision',
-        executable='bellande_2d_computer_vision_prediction.py',
+        executable='bellande_2d_computer_vision_face_detection.py',
         name='prediction_node',
         output='screen',
         remappings=[('camera/image_raw', '/usb_cam/image_raw')]

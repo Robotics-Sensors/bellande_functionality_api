@@ -24,8 +24,9 @@ the License.
     <param name="io_method" value="mmap" />
   </node>
 
-  <node name="prediction_node" pkg="ros_web_api_bellande_2d_computer_vision"
-    type="bellande_2d_computer_vision_prediction.py" output="screen">
+  <node name="face_detection_node" pkg="ros_web_api_bellande_2d_computer_vision"
+    type="bellande_2d_computer_vision_face_detection.py"
+    output="screen">
     <remap from="camera/image_raw" to="/usb_cam/image_raw" />
   </node>
 
