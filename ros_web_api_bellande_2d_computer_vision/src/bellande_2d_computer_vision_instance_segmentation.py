@@ -24,7 +24,7 @@ from cv_bridge import CvBridge
 
 
 
-def object_detection(image):
+def instance_segmentation(image):
     bridge = CvBridge()
     cv_image = bridge.imgmsg_to_cv2(image, desired_encoding="bgr8")
 
@@ -43,13 +43,10 @@ def object_detection(image):
 
     if response.status_code == 200:
         result = response.json()
-        for obj in result['objects']:
-            label = obj['label']
-            confidence = obj['confidence']
-            x, y, w, h = obj['bbox']
-            cv2.rectangle(cv_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
-            cv2.putText(cv_image, f"{label}: {confidence:.2f}", (x, y-10),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+        for instance in result['instances']:
+            mask = np.array(instance['mask'], dtype=np.uint8)
+            color = np.random.randint(0, 255, 3).tolist()
+            cv_image = cv2.addWeighted(cv_image, 1, cv2.applyColorMap(mask, cv2.COLORMAP_JET), 0.5, 0)
 
         return bridge.cv2_to_imgmsg(cv_image, encoding="bgr8")
     else:
@@ -57,16 +54,14 @@ def object_detection(image):
         return None
 
 
-
 def image_callback(msg):
-    processed_img = object_detection(msg)
+    processed_img = instance_segmentation(msg)
     if processed_img:
         pub.publish(processed_img)
 
 
-
 def main():
-    global api_url, api_access_key ,pub
+    global api_url, api_access_key, pub
 
     config_file_path = os.path.join(os.path.dirname(__file__), '../config/configs.json')
     if not os.path.exists(config_file_path):
@@ -75,29 +70,29 @@ def main():
     with open(config_file_path, 'r') as config_file:
         config = json.load(config_file)
         url = config['url']
-        endpoint_path = config['endpoint_path']["object_detection"]
+        endpoint_path = config['endpoint_path']["instance_segmentation"]
         api_access_key = config["Bellande_Framework_Access_Key"]
     
     if ros_version == "1":
-        rospy.init_node('object_detection_node', anonymous=True)
-        pub = rospy.Publisher('object_detection_result', Image, queue_size=10)
+        rospy.init_node('instance_segmentation_node', anonymous=True)
+        pub = rospy.Publisher('instance_segmentation_result', Image, queue_size=10)
         sub = rospy.Subscriber('camera/image_raw', Image, image_callback)
     elif ros_version == "2":
         rclpy.init()
-        node = rclpy.create_node('object_detection_node')
-        pub = node.create_publisher(Image, 'object_detection_result', 10)
+        node = rclpy.create_node('instance_segmentation_node')
+        pub = node.create_publisher(Image, 'instance_segmentation_result', 10)
         sub = node.create_subscription(Image, 'camera/image_raw', image_callback, 10)
 
     api_url = f"{url}{endpoint_path}"
 
     try:
-        print("Object detection node is running. Ctrl+C to exit.")
+        print("Instance segmentation node is running. Ctrl+C to exit.")
         if ros_version == "1":
             rospy.spin()
         elif ros_version == "2":
             rclpy.spin(node)
     except KeyboardInterrupt:
-        print("Shutting down object detection node.")
+        print("Shutting down instance segmentation node.")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
     finally:
