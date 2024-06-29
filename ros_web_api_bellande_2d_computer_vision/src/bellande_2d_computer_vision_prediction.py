@@ -34,7 +34,11 @@ def predict(image):
         "image": img_base64
     }
 
-    response = requests.post(api_url, json=payload)
+    headers = {
+        "Authorization": f"Bearer {api_access_key}"
+    }
+
+    response = requests.post(api_url, json=payload, headers=headers)
 
     if response.status_code == 200:
         result = response.json()
@@ -67,6 +71,7 @@ def main():
         config = json.load(config_file)
         url = config['url']
         endpoint_path = config['endpoint_path']["prediction"]
+        api_access_key = config["Bellande_Framework_Access_Key"]
     
     # Initialize ROS node
     if ros_version == "1":
