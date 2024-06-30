@@ -44,6 +44,9 @@ if($ENV{ROS_VERSION} EQUAL 1)
   catkin_install_python(
     PROGRAMS
     src/bellande_3d_computer_vision_prediction.py
+    src/bellande_3d_computer_vision_object_detection.py
+    src/bellande_3d_computer_vision_instance_segmentation.py
+    src/bellande_3d_computer_vision_semantic_segmentation.py
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
 endif()
@@ -51,10 +54,17 @@ endif()
 # Install Python scripts, configuration files, and launch files
 if($ENV{ROS_VERSION} EQUAL "1")
     install(PROGRAMS src/bellande_3d_computer_vision_prediction.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+    install(PROGRAMS src/bellande_3d_computer_vision_object_detection.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+    install(PROGRAMS src/bellande_3d_computer_vision_instance_segmentation.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+    install(PROGRAMS src/bellande_3d_computer_vision_semantic_segmentation.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
     install(DIRECTORY config/ DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config)
     install(DIRECTORY launch/ DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch)
-elseif($ENV{ROS_VERSION} EQUAL "2")
+else()
     install(PROGRAMS src/bellande_3d_computer_vision_prediction.py DESTINATION lib/${PROJECT_NAME})
+    install(PROGRAMS src/bellande_3d_computer_vision_object_detection.py DESTINATION lib/${PROJECT_NAME})
+    install(PROGRAMS src/bellande_3d_computer_vision_instance_segmentation.py DESTINATION lib/${PROJECT_NAME})
+    install(PROGRAMS src/bellande_3d_computer_vision_semantic_segmentation.py DESTINATION lib/${PROJECT_NAME})
     install(DIRECTORY config/ DESTINATION share/${PROJECT_NAME}/config)
     install(DIRECTORY launch/ DESTINATION share/${PROJECT_NAME}/launch)
+    ament_package()
 endif()
