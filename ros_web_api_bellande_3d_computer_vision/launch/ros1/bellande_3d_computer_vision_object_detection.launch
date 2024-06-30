@@ -19,8 +19,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <param name="config_file"
     value="$(find ros_web_api_bellande_3d_computer_vision)/config/configs.json" />
 
-  <node name="pointcloud_prediction_node" pkg="ros_web_api_bellande_3d_computer_vision"
-    type="bellande_3d_computer_vision_prediction.py" output="screen">
+  <node name="pointcloud_object_detection_node" pkg="ros_web_api_bellande_3d_computer_vision"
+    type="pointcloud_object_detection_node.py" output="screen">
     <remap from="input_pointcloud" to="/pointcloud_topic" />
   </node>
 

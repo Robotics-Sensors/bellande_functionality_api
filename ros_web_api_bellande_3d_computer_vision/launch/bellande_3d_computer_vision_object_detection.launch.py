@@ -26,15 +26,15 @@ from launch.substitutions import LaunchConfiguration
 def ros1_launch_description():
     args = sys.argv[1:]
     
-    roslaunch_command = ["roslaunch", "ros_web_api_bellande_3d_computer_vision", "bellande_3d_computer_vision_prediction.launch"] + args
+    roslaunch_command = ["roslaunch", "ros_web_api_bellande_3d_computer_vision", "bellande_3d_computer_vision_object_detection.launch"] + args
     
     roslaunch_command.extend([
         "param", "config_file",
         "value:=$(find ros_web_api_bellande_3d_computer_vision)/config/configs.json"
-    ])     
+    ])    
     
     roslaunch_command.extend([
-        "ros_web_api_bellande_3d_computer_vision", "bellande_3d_computer_vision_prediction.py", "name:=pointcloud_prediction_node"
+        "ros_web_api_bellande_3d_computer_vision", "bellande_3d_computer_vision_object_detection.py", "name:=pointcloud_object_detection_node"
     ])
     
     roslaunch_command.extend([
@@ -50,13 +50,13 @@ def ros2_launch_description():
     
     nodes_to_launch.append(Node(
         package='ros_web_api_bellande_3d_computer_vision',
-        executable='bellande_3d_computer_vision_prediction.py',
-        name='pointcloud_prediction_node',
+        executable='pointcloud_object_detection_node.py',
+        name='pointcloud_object_detection_node',
         output='screen',
         remappings=[('input_pointcloud', '/pointcloud_topic')],
         parameters=[{'config_file': LaunchConfiguration('config_file')}]
     ))
-    
+
     nodes_to_launch.append(Node(
         package='rviz2',
         executable='rviz2',
