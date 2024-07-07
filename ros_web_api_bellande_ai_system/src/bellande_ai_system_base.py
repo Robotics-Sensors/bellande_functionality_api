@@ -47,7 +47,7 @@ def input_callback(msg):
 
 def main():
     global api_url, api_access_key, pub
-    config_file_path = os.path.join(os.path.dirname(__file__), '../config/ai_system.json')
+    config_file_path = os.path.join(os.path.dirname(__file__), '../config/configs.json')
     
     if not os.path.exists(config_file_path):
         print("Config file not found:", config_file_path)
