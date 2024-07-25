@@ -1,3 +1,3 @@
-# Bellande Search Path Web ROS/ROS2 API Intergration
+# Bellande Speech
 
-[Bellande Search Path](https://github.com/RonaldsonBellande/bellande_robots_step)
+[Bellande Speech Detection](https://github.com/RonaldsonBellande/bellande_speech_detection)
