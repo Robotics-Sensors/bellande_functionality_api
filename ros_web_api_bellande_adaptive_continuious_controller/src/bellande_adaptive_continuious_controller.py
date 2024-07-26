@@ -16,35 +16,37 @@
 import json
 import os
 import requests
-from std_msgs.msg import String
+from std_msgs.msg import Float64
 
-def speech_detection(audio_data, sample_rate, language):
+def bellande_controller(setpoint, current_value, kp, ki, kd):
     payload = {
-        "audio_data": audio_data,
-        "sample_rate": sample_rate,
-        "language": language
+        "setpoint": setpoint,
+        "current_value": current_value,
+        "kp": kp,
+        "ki": ki,
+        "kd": kd
     }
     headers = {
-        "Authorization": f"Bearer {api_access_key}",
-        'accept': 'application/json',
-        'Content-Type': 'application/json'
+        "Authorization": f"Bearer {api_access_key}"
     }
     response = requests.post(api_url, json=payload, headers=headers)
     if response.status_code == 200:
         result = response.json()
-        return result['detected_speech']
+        return result['control_output']
     else:
         print(f"Error: {response.status_code} - {response.text}")
         return None
 
-def audio_callback(msg):
-    sample_rate = rospy.get_param('sample_rate', 16000)
-    language = rospy.get_param('language', 'en-US')
+def control_callback(msg):
+    setpoint = rospy.get_param('setpoint', 0)
+    kp = rospy.get_param('kp', 1.0)
+    ki = rospy.get_param('ki', 0.1)
+    kd = rospy.get_param('kd', 0.05)
     
-    detected_speech = speech_detection(msg.data, sample_rate, language)
-    if detected_speech is not None:
-        output_msg = String()
-        output_msg.data = detected_speech
+    control_output = bellande_controller(setpoint, msg.data, kp, ki, kd)
+    if control_output is not None:
+        output_msg = Float64()
+        output_msg.data = control_output
         pub.publish(output_msg)
 
 def main():
@@ -58,30 +60,30 @@ def main():
     with open(config_file_path, 'r') as config_file:
         config = json.load(config_file)
         url = config['url']
-        endpoint_path = config['endpoint_path']["speech_detection"]
+        endpoint_path = config['endpoint_path']["bellande_controller"]
         api_access_key = config["Bellande_Framework_Access_Key"]
     
     # Initialize ROS node
     if ros_version == "1":
-        rospy.init_node('speech_detection_node', anonymous=True)
-        pub = rospy.Publisher('detected_speech', String, queue_size=10)
-        sub = rospy.Subscriber('audio_data', String, audio_callback)
+        rospy.init_node('bellande_controller_node', anonymous=True)
+        pub = rospy.Publisher('control_output', Float64, queue_size=10)
+        sub = rospy.Subscriber('current_value', Float64, control_callback)
     elif ros_version == "2":
         rclpy.init()
-        node = rclpy.create_node('speech_detection_node')
-        pub = node.create_publisher(String, 'detected_speech', 10)
-        sub = node.create_subscription(String, 'audio_data', audio_callback, 10)
+        node = rclpy.create_node('bellande_controller_node')
+        pub = node.create_publisher(Float64, 'control_output', 10)
+        sub = node.create_subscription(Float64, 'current_value', control_callback, 10)
 
     api_url = f"{url}{endpoint_path}"
 
     try:
-        print("Speech detection node is running. Ctrl+C to exit.")
+        print("BellandeController node is running. Ctrl+C to exit.")
         if ros_version == "1":
             rospy.spin()
         elif ros_version == "2":
             rclpy.spin(node)
     except KeyboardInterrupt:
-        print("Shutting down speech detection node.")
+        print("Shutting down BellandeController node.")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
     finally:
