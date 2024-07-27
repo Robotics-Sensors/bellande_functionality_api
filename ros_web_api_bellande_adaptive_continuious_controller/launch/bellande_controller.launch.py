@@ -31,17 +31,16 @@ def ros1_launch_description():
 
 def ros2_launch_description():
     # Declare launch arguments
-    setpoint_arg = DeclareLaunchArgument('setpoint')
-    kp_arg = DeclareLaunchArgument('kp')
-    ki_arg = DeclareLaunchArgument('ki')
-    kd_arg = DeclareLaunchArgument('kd')
+    gains_arg = DeclareLaunchArgument('gains', default_value='[1.0, 0.1, 0.05]')
+    name_arg = DeclareLaunchArgument('name', default_value='BellandeController')
+    output_limits_arg = DeclareLaunchArgument('output_limits', default_value='[-1000.0, 1000.0]')
 
     # Create a list to hold all nodes to be launched
     nodes_to_launch = []
 
     # ROS2 specific configurations
     ros_launch_arguments = [
-        setpoint_arg, kp_arg, ki_arg, kd_arg,
+        gains_arg, name_arg, output_limits_arg,
     ]
 
     nodes_to_launch.append(Node(
@@ -50,10 +49,9 @@ def ros2_launch_description():
         name='bellande_controller_node',
         output='screen',
         parameters=[
-            {'setpoint': LaunchConfiguration('setpoint')},
-            {'kp': LaunchConfiguration('kp')},
-            {'ki': LaunchConfiguration('ki')},
-            {'kd': LaunchConfiguration('kd')},
+            {'gains': LaunchConfiguration('gains')},
+            {'name': LaunchConfiguration('name')},
+            {'output_limits': LaunchConfiguration('output_limits')},
         ],
     ))
 
