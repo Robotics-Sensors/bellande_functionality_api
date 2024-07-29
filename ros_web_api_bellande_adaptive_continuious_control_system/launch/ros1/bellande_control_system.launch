@@ -18,14 +18,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <!-- Arguments -->
   <arg name="initial_state" default="idle"/>
   <arg name="name" default="BellandeControlSystem"/>
-  <arg name="connectivity_passcode" default="default_passcode"/>
-  <arg name="bellande_framework_access_key" default="bellande_web_api_opensource"/>
 
   <!-- Launch the BellandeControlSystem node -->
   <node name="bellande_control_system_node" pkg="bellande_control_system" type="bellande_control_system.py" output="screen">
     <param name="initial_state" value="$(arg initial_state)"/>
     <param name="name" value="$(arg name)"/>
-    <param name="connectivity_passcode" value="$(arg connectivity_passcode)"/>
-    <param name="bellande_framework_access_key" value="$(arg bellande_framework_access_key)"/>
   </node>
 </launch>

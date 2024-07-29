@@ -23,30 +23,26 @@ from launch.substitutions import LaunchConfiguration
 
 def ros1_launch_description():
     args = sys.argv[1:]
-    roslaunch_command = ["roslaunch", "bellande_control_system", "bellande_control_system.launch"] + args
+    roslaunch_command = ["roslaunch", "ros_web_api_bellande_adaptive_continuious_control_system", "bellande_control_system.launch"] + args
     subprocess.call(roslaunch_command)
 
 def ros2_launch_description():
     initial_state_arg = DeclareLaunchArgument('initial_state', default_value='idle')
     name_arg = DeclareLaunchArgument('name', default_value='BellandeControlSystem')
-    connectivity_passcode_arg = DeclareLaunchArgument('connectivity_passcode', default_value='default_passcode')
-    bellande_framework_access_key_arg = DeclareLaunchArgument('bellande_framework_access_key', default_value='bellande_web_api_opensource')
 
     nodes_to_launch = []
     ros_launch_arguments = [
-        initial_state_arg, name_arg, connectivity_passcode_arg, bellande_framework_access_key_arg,
+        initial_state_arg, name_arg,
     ]
 
     nodes_to_launch.append(Node(
-        package='bellande_control_system',
+        package='ros_web_api_bellande_adaptive_continuious_control_system',
         executable='bellande_control_system.py',
         name='bellande_control_system_node',
         output='screen',
         parameters=[
             {'initial_state': LaunchConfiguration('initial_state')},
             {'name': LaunchConfiguration('name')},
-            {'connectivity_passcode': LaunchConfiguration('connectivity_passcode')},
-            {'bellande_framework_access_key': LaunchConfiguration('bellande_framework_access_key')},
         ],
     ))
 

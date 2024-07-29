@@ -18,15 +18,14 @@ import os
 import requests
 from std_msgs.msg import String
 
-def bellande_control_system(state, action, parameters, connectivity_passcode):
+def bellande_control_system(state, action, parameters):
     payload = {
         "state": state,
         "action": action,
-        "parameters": parameters,
-        "connectivity_passcode": connectivity_passcode
+        "parameters": parameters
     }
     headers = {
-        "Authorization": f"Bearer {Bellande_Framework_Access_Key}",
+        "Authorization": f"Bearer {api_access_key}",
         "X-Connectivity-Passcode": connectivity_passcode
     }
     response = requests.post(api_url, json=payload, headers=headers)
@@ -39,25 +38,23 @@ def bellande_control_system(state, action, parameters, connectivity_passcode):
 
 def control_callback(msg):
     data = json.loads(msg.data)
-    connectivity_passcode = data['connectivity_passcode']
-    current_state = rospy.get_param(f'current_state_{connectivity_passcode}', 'idle')
+    current_state = rospy.get_param('current_state', 'idle')
     action = data['action']
     parameters = data['parameters']
     
-    output, next_state = bellande_control_system(current_state, action, parameters, connectivity_passcode)
+    output, next_state = bellande_control_system(current_state, action, parameters)
     if output is not None:
         output_msg = String()
         output_msg.data = json.dumps({
             "output": output,
-            "next_state": next_state,
-            "connectivity_passcode": connectivity_passcode
+            "next_state": next_state
         })
         pub.publish(output_msg)
         if next_state:
-            rospy.set_param(f'current_state_{connectivity_passcode}', next_state)
+            rospy.set_param('current_state', next_state)
 
 def main():
-    global api_url, Bellande_Framework_Access_Key, pub
+    global api_url, api_access_key, connectivity_passcode, pub
     config_file_path = os.path.join(os.path.dirname(__file__), '../config/configs.json')
     
     if not os.path.exists(config_file_path):
@@ -68,7 +65,8 @@ def main():
         config = json.load(config_file)
         url = config['url']
         endpoint_path = config['endpoint_path']["bellande_control_system_base"]
-        Bellande_Framework_Access_Key = config["Bellande_Framework_Access_Key"]
+        connectivity_passcode = config["connectivity_passcode"]
+        api_access_key = config["Bellande_Framework_Access_Key"]
     
     # Initialize ROS node
     if ros_version == "1":
