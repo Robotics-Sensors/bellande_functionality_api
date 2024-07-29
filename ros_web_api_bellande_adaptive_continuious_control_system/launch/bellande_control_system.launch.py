@@ -29,12 +29,12 @@ def ros1_launch_description():
 def ros2_launch_description():
     initial_state_arg = DeclareLaunchArgument('initial_state', default_value='idle')
     name_arg = DeclareLaunchArgument('name', default_value='BellandeControlSystem')
-    action_parameters_arg = DeclareLaunchArgument('action_parameters', default_value='{}')
+    connectivity_passcode_arg = DeclareLaunchArgument('connectivity_passcode', default_value='default_passcode')
+    bellande_framework_access_key_arg = DeclareLaunchArgument('bellande_framework_access_key', default_value='bellande_web_api_opensource')
 
     nodes_to_launch = []
-
     ros_launch_arguments = [
-        initial_state_arg, name_arg, action_parameters_arg,
+        initial_state_arg, name_arg, connectivity_passcode_arg, bellande_framework_access_key_arg,
     ]
 
     nodes_to_launch.append(Node(
@@ -45,7 +45,8 @@ def ros2_launch_description():
         parameters=[
             {'initial_state': LaunchConfiguration('initial_state')},
             {'name': LaunchConfiguration('name')},
-            {'action_parameters': LaunchConfiguration('action_parameters')},
+            {'connectivity_passcode': LaunchConfiguration('connectivity_passcode')},
+            {'bellande_framework_access_key': LaunchConfiguration('bellande_framework_access_key')},
         ],
     ))
 
