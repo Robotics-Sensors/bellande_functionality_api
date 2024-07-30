@@ -18,9 +18,9 @@ import os
 import requests
 from std_msgs.msg import String
 
-def get_ai_response(input_text):
+def get_ai_response(input_command):
     payload = {
-        "input_text": input_text
+        "input_command": input_command
     }
     headers = {
         'accept': 'application/json',
@@ -56,19 +56,19 @@ def main():
     with open(config_file_path, 'r') as config_file:
         config = json.load(config_file)
         url = config['url']
-        endpoint_path = config['endpoint_path']["base"]
+        endpoint_path = config['endpoint_path']["command"]
         api_access_key = config["Bellande_Framework_Access_Key"]
     
     # Initialize ROS node
     if ros_version == "1":
         rospy.init_node('ai_system_node', anonymous=True)
-        pub = rospy.Publisher('ai_system_node_ai_response', String, queue_size=10)
-        sub = rospy.Subscriber('ai_system_node_ai_input', String, input_callback)
+        pub = rospy.Publisher('ai_system_node_ai_command_response', String, queue_size=10)
+        sub = rospy.Subscriber('ai_system_node_ai_coomand_input', String, input_callback)
     elif ros_version == "2":
         rclpy.init()
         node = rclpy.create_node('ai_system_node')
-        pub = node.create_publisher(String, 'ai_system_node_ai_response', 10)
-        sub = node.create_subscription(String, 'ai_system_node_ai_input', input_callback, 10)
+        pub = node.create_publisher(String, 'ai_system_node_ai_command_response', 10)
+        sub = node.create_subscription(String, 'ai_system_node_ai_command_input', input_callback, 10)
     
     api_url = f"{url}{endpoint_path}"
     
