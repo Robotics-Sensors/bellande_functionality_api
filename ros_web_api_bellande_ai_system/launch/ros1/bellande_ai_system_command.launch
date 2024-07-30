@@ -21,9 +21,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <arg name="config_file" default="$(find ros_web_api_bellande_ai_system)/config/configs.json" />
   <param name="ai_system_config" textfile="$(arg config_file)" />
 
-  <!-- Launch the AI System base node -->
-  <node name="bellande_ai_system_base_node" pkg="ros_web_api_bellande_ai_system"
-    type="bellande_ai_system_base.py" output="screen">
+  <!-- Launch the AI System command node -->
+  <node name="bellande_ai_system_command_node" pkg="ros_web_api_bellande_ai_system"
+    type="bellande_ai_system_command.py" output="screen">
     <param name="config_file" value="$(arg config_file)" />
   </node>
 
