@@ -1,5 +1,5 @@
 {
-  "url": "https://bellanderoboticssensorsresearchinnovationcenter-kot42qxp.b4a.run",
+  "url": "https://bellande-robotics-sensors-research-innovation-center.org",
   "endpoint_path": {
     "2d": "/api/Bellande_Search_Path/bellande_search_path_2d",
     "3d": "/api/Bellande_Search_Path/bellande_search_path_3d",

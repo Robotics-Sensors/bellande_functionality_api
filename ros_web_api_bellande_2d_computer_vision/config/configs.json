@@ -15,7 +15,7 @@
     "along with this program.  If not, see <https://www.gnu.org/licenses/>.",
     "GNU General Public License v3.0 or later"
   ],
-  "url": "https://bellanderoboticssensorsresearchinnovationcenter-kot42qxp.b4a.run",
+  "url": "https://bellande-robotics-sensors-research-innovation-center.org",
   "endpoint_path": {
     "prediction": "/api/Bellande_2D_Computer_Vision/bellande_classification_prediction",
     "face_detection": "/api/Bellande_2D_Computer_Vision/bellande_face_detection",

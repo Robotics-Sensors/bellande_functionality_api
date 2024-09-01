@@ -15,7 +15,7 @@
     "along with this program.  If not, see <https://www.gnu.org/licenses/>.",
     "GNU General Public License v3.0 or later"
   ],
-  "url": "https://bellanderoboticssensorsresearchinnovationcenter-kot42qxp.b4a.run",
+  "url": "https://bellande-robotics-sensors-research-innovation-center.org",
   "endpoint_path": {
     "2d": "/api/Bellande_Step/bellande_step_2d",
     "3d": "/api/Bellande_Step/bellande_step_3d",

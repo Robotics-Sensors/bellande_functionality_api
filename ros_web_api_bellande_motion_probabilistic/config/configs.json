@@ -1,5 +1,5 @@
 {
-  "url": "https://bellanderoboticssensorsresearchinnovationcenter-kot42qxp.b4a.run",
+  "url": "https://bellande-robotics-sensors-research-innovation-center.org",
   "endpoint_path": {
     "2d": "/api/Bellande_Motion_Probabilistic/bellande_motion_probabilistic_2d",
     "3d": "/api/Bellande_Motion_Probabilistic/bellande_motion_probabilistic_3d",
