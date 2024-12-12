@@ -16,7 +16,7 @@
 ## 📧 Explore the Docker image for the Bellande Robotic VPN:
 - **Robotic VPN**: [![ROS1 Docker Image](https://img.shields.io/docker/pulls/ronaldsonbellande/bellande_robotic_vpn)](https://hub.docker.com/r/ronaldsonbellande/bellande_robotic_vpn)
 
-## Use the Web-ROS-API Docker Image  for your needs with the Bellande API
+## Use the Web-API Docker Image  for your needs with the Bellande API
 - **ROS1**: [![ROS1 Docker Image](https://img.shields.io/docker/pulls/ronaldsonbellande/bellande_web_api_packages_ros1)](https://hub.docker.com/r/ronaldsonbellande/bellande_web_api_packages_ros1)
 - **ROS2**: [![ROS2 Docker Image](https://img.shields.io/docker/pulls/ronaldsonbellande/bellande_web_api_packages_ros2)](https://hub.docker.com/r/ronaldsonbellande/bellande_web_api_packages_ros2)
 
@@ -42,7 +42,6 @@ The primary functionality of this API is to provide access to Bellande Algorithm
 
 ## 💻 Usage
 To begin leveraging Bellande's algorithms in your projects, simply pull the Docker image and integrate the API into your robotic environment. Detailed instructions on how to deploy and utilize the API can be found in the provided documentation.
-
 
 
 # License

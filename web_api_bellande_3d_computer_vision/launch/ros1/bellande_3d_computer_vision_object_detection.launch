@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2024 Bellande Robotics Sensors Research Innovation Center, Ronaldson Bellande
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<launch>
+  <param name="config_file"
+    value="$(find web_api_bellande_3d_computer_vision)/config/configs.json" />
+
+  <node name="pointcloud_object_detection_node" pkg="web_api_bellande_3d_computer_vision"
+    type="pointcloud_object_detection_node.py" output="screen">
+    <remap from="input_pointcloud" to="/pointcloud_topic" />
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz"
+    args="-d $(find web_api_bellande_3d_computer_vision)/rviz/pointcloud_visualization.rviz" />
+
+</launch>

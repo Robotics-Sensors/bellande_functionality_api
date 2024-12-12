@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2024 Bellande Robotics Sensors Research Innovation Center, Ronaldson Bellande
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+-->
+<launch>
+  <arg name="x1" />
+  <arg name="y1" />
+  <arg name="x2" />
+  <arg name="y2" />
+  <arg name="limit" />
+
+  <node pkg="web_api_bellande_step" type="bellande_step_api_2d.py"
+    name="bellande_step_api_2d_node" output="screen">
+    <param name="x1" value="$(arg x1)" />
+    <param name="y1" value="$(arg y1)" />
+    <param name="x2" value="$(arg x2)" />
+    <param name="y2" value="$(arg y2)" />
+    <param name="limit" value="$(arg limit)" />
+  </node>
+</launch>
