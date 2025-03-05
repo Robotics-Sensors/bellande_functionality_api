@@ -1,0 +1,14 @@
+{
+  "url": "https://bellande-robotics-sensors-research-innovation-center.org",
+  "endpoint_path": {
+    "2d": "/api/Bellande_Motion_Probability/bellande_motion_probability_2d",
+    "3d": "/api/Bellande_Motion_Probability/bellande_motion_probability_3d",
+    "4d": "/api/Bellande_Motion_Probability/bellande_motion_probability_4d",
+    "5d": "/api/Bellande_Motion_Probability/bellande_motion_probability_5d",
+    "6d": "/api/Bellande_Motion_Probability/bellande_motion_probability_6d",
+    "7d": "/api/Bellande_Motion_Probability/bellande_motion_probability_7d",
+    "8d": "/api/Bellande_Motion_Probability/bellande_motion_probability_8d",
+    "9d": "/api/Bellande_Motion_Probability/bellande_motion_probability_9d",
+    "10d": "/api/Bellande_Motion_Probability/bellande_motion_probability_10d"
+  }
+}

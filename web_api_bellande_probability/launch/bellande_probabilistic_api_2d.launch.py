@@ -27,7 +27,7 @@ def ros1_launch_description():
     args = sys.argv[1:]
 
     # Construct the ROS 1 launch commandi
-    roslaunch_command = ["roslaunch", "web_api_bellande_probabilistic", "bellande_probabilistic_api_2d.launch"] + args
+    roslaunch_command = ["roslaunch", "web_api_bellande_probability", "bellande_probability_api_2d.launch"] + args
 
     # Execute the launch command
     subprocess.call(roslaunch_command)
@@ -49,9 +49,9 @@ def ros2_launch_description():
         x1_arg, y1_arg, x2_arg, y2_arg, limit_arg,
     ]
     nodes_to_launch.append(Node(
-        package='web_api_bellande_probabilistic',
-        executable='bellande_probabilistic_api_2d.py',
-        name='bellande_probabilistic_api_2d_node',
+        package='web_api_bellande_probability',
+        executable='bellande_probability_api_2d.py',
+        name='bellande_probability_api_2d_node',
         output='screen',
         parameters=[
             {'x1': LaunchConfiguration('x1')},

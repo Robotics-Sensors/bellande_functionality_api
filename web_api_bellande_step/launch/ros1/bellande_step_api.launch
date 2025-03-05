@@ -22,8 +22,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <arg name="y2" />
   <arg name="limit" />
 
-  <node pkg="web_api_bellande_probabilistic" type="bellande_probabilistic_api_2d.py"
-    name="bellande_probabilistic_api_2d_node" output="screen">
+  <node pkg="web_api_bellande_step" type="bellande_step_api_2d.py"
+    name="bellande_step_api_2d_node" output="screen">
     <param name="x1" value="$(arg x1)" />
     <param name="y1" value="$(arg y1)" />
     <param name="x2" value="$(arg x2)" />

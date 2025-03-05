@@ -14,7 +14,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 3.8)
-project(web_api_bellande_motion_probabilistic)
+project(web_api_bellande_motion_probability)
 
 # Find ROS
 if($ENV{ROS_VERSION} EQUAL 1)

@@ -16,12 +16,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <package format="3">
-  <name>web_api_bellande_motion_probabilistic</name>
+  <name>web_api_bellande_step</name>
   <version>0.0.1</version>
   <description>Bellande ROS/ROS2 package with a JSON config file for making HTTP requests</description>
   <author email="ronaldsonbellande@gmail.com">Ronaldson Bellande</author>
   <maintainer email="ronaldsonbellande@gmail.com">Ronaldson Bellande</maintainer>
-  <license>Apache License 2.0</license>
+  <license>GNU General Public License v3.0</license>
 
 
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>

@@ -14,7 +14,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 3.8)
-project(web_api_bellande_probabilistic)
+project(web_api_bellande_step)
 
 # Find ROS
 if($ENV{ROS_VERSION} EQUAL 1)
@@ -43,18 +43,18 @@ endif()
 if($ENV{ROS_VERSION} EQUAL 1)
   catkin_install_python(
     PROGRAMS
-    src/bellande_probabilistic_api_2d.py
+    src/bellande_step_api_2d.py
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
 endif()
 
 # Install Python scripts, configuration files, and launch files
 if($ENV{ROS_VERSION} EQUAL "1")
-    install(PROGRAMS src/bellande_probabilistic_api_2d.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+    install(PROGRAMS src/bellande_step_api_2d.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
     install(DIRECTORY config/ DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config)
     install(DIRECTORY launch/ DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch)
 elseif($ENV{ROS_VERSION} EQUAL "2")
-    install(PROGRAMS src/bellande_probabilistic_api_2d.py DESTINATION lib/${PROJECT_NAME})
+    install(PROGRAMS src/bellande_step_api_2d.py DESTINATION lib/${PROJECT_NAME})
     install(DIRECTORY config/ DESTINATION share/${PROJECT_NAME}/config)
     install(DIRECTORY launch/ DESTINATION share/${PROJECT_NAME}/launch)
     ament_package()
