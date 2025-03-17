@@ -3,6 +3,7 @@
 # Bellande Configs System
 - https://git.bellande-technologies.com/BRSRI/bellande_configs_system
 - https://github.com/Robotics-Sensors/bellande_configs_system
+- https://gitlab.com/Bellande-Robotics-Sensors-Research-Innovation-Center/bellande_configs_system
 
 # Benifits of Using the Bellande API's
 - Works in any framework
@@ -14,7 +15,7 @@
 - Checkout our research organization for information, information on this repository is limited as well as all the configs are demos
 
 ### 🔑 API USE
-- Each Bellande APi has there unique endpoint
+- Each Bellande API has there unique endpoint
 - **Default Assess Key for Model**: ``bellande_web_api_opensource``
 
 ## 📧 Explore the Docker image for the Bellande Robotic VPN:
