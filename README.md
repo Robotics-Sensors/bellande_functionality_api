@@ -1,5 +1,10 @@
 # 🤖 Bellande Algorithms Web BRSOA/ROS/ROS2 API
 
+# Bellande Robotic Operating System Architecture
+- https://git.bellande-technologies.com/BRSRI/bellande_robotic_system_operating_architecture
+- https://github.com/Robotics-Sensors/bellande_robotic_system_operating_architecture
+- https://gitlab.com/Bellande-Robotics-Sensors-Research-Innovation-Center/bellande_robotic_system_operating_architecture
+
 # Bellande Configs System
 - https://git.bellande-technologies.com/BRSRI/bellande_configs_system
 - https://github.com/Robotics-Sensors/bellande_configs_system
