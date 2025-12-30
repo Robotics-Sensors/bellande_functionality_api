@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <package format="3">
-  <name>web_api_bellande_step</name>
+  <name>web_api_bellande_limit</name>
   <version>0.0.1</version>
   <description>Bellande ROS/ROS2 package with a JSON config file for making HTTP requests</description>
   <author email="ronaldsonbellande@gmail.com">Ronaldson Bellande</author>

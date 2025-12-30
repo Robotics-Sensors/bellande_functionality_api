@@ -4,11 +4,13 @@
 - https://git.bellande-technologies.com/BRSRI/bellande_robotic_system_operating_architecture
 - https://github.com/Robotics-Sensors/bellande_robotic_system_operating_architecture
 - https://gitlab.com/Bellande-Robotics-Sensors-Research-Innovation-Center/bellande_robotic_system_operating_architecture
+- https://bitbucket.org/Bellande-Robotics-Sensors/bellande_robotic_system_operating_architecture
 
 # Bellande Configs System
 - https://git.bellande-technologies.com/BRSRI/bellande_configs_system
 - https://github.com/Robotics-Sensors/bellande_configs_system
 - https://gitlab.com/Bellande-Robotics-Sensors-Research-Innovation-Center/bellande_configs_system
+- https://bitbucket.org/Bellande-Robotics-Sensors/bellande_configs_system
 
 # Benifits of Using the Bellande API's
 - Works in any framework
@@ -52,7 +54,6 @@ The primary functionality of this API is to provide access to Bellande Algorithm
 
 ## 💻 Usage
 To begin leveraging Bellande's algorithms in your projects, simply pull the Docker image and integrate the API into your robotic environment. Detailed instructions on how to deploy and utilize the API can be found in the provided documentation.
-
 
 # License
 This API's is distributed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) with all the code Publicly and Privately use case, see [LICENSE](https://github.com/RonaldsonBellande/bellande_web_ros_api/blob/main/LICENSE) and [NOTICE](https://github.com/RonaldsonBellande/bellande_web_ros_api/blob/main/LICENSE) for more information.
