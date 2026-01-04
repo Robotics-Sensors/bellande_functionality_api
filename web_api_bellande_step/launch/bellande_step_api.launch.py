@@ -27,7 +27,7 @@ def ros1_launch_description():
     args = sys.argv[1:]
 
     # Construct the ROS 1 launch commandi
-    roslaunch_command = ["roslaunch", "web_api_bellande_step", "bellande_step_api_2d.launch"] + args
+    roslaunch_command = ["roslaunch", "web_api_bellande_step", "bellande_step_api.launch"] + args
 
     # Execute the launch command
     subprocess.call(roslaunch_command)
@@ -50,8 +50,8 @@ def ros2_launch_description():
     ]
     nodes_to_launch.append(Node(
         package='web_api_bellande_step',
-        executable='bellande_step_api_2d.py',
-        name='bellande_step_api_2d_node',
+        executable='bellande_step_api.py',
+        name='bellande_step_api_node',
         output='screen',
         parameters=[
             {'x1': LaunchConfiguration('x1')},

@@ -22,14 +22,7 @@ if($ENV{ROS_VERSION} EQUAL 1)
     roscpp
     rospy
   )
-else()
-  find_package(ament_cmake REQUIRED COMPONENTS
-    rclcpp
-    rclpy
-  )
-endif()
-
-if($ENV{ROS_VERSION} EQUAL 1)
+  
   catkin_package(
     INCLUDE_DIRS
     LIBRARIES ${PROJECT_NAME}
@@ -37,25 +30,48 @@ if($ENV{ROS_VERSION} EQUAL 1)
     roscpp
     rospy
   )
-endif()
-
-# Install Python scripts for both ROS 1
-if($ENV{ROS_VERSION} EQUAL 1)
+  
   catkin_install_python(
     PROGRAMS
-    src/bellande_step_api_2d.py
+    src/bellande_step_api.py
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
-endif()
-
-# Install Python scripts, configuration files, and launch files
-if($ENV{ROS_VERSION} EQUAL "1")
-    install(PROGRAMS src/bellande_step_api_2d.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
-    install(DIRECTORY config/ DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config)
-    install(DIRECTORY launch/ DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch)
-elseif($ENV{ROS_VERSION} EQUAL "2")
-    install(PROGRAMS src/bellande_step_api_2d.py DESTINATION lib/${PROJECT_NAME})
-    install(DIRECTORY config/ DESTINATION share/${PROJECT_NAME}/config)
-    install(DIRECTORY launch/ DESTINATION share/${PROJECT_NAME}/launch)
-    ament_package()
+  
+  install(
+    PROGRAMS src/bellande_step_api.py
+    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  )
+  
+  install(
+    DIRECTORY config/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
+  )
+  
+  install(
+    DIRECTORY launch/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+  )
+  
+else()
+  find_package(ament_cmake REQUIRED)
+  find_package(ament_cmake_python REQUIRED)
+  find_package(rclcpp REQUIRED)
+  find_package(rclpy REQUIRED)
+  
+  install(
+    PROGRAMS src/bellande_step_api.py
+    DESTINATION lib/${PROJECT_NAME}
+  )
+  
+  install(
+    DIRECTORY config/
+    DESTINATION share/${PROJECT_NAME}/config
+  )
+  
+  install(
+    DIRECTORY launch/
+    DESTINATION share/${PROJECT_NAME}/launch
+  )
+  
+  ament_package()
 endif()

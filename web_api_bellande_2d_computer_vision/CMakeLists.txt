@@ -22,14 +22,7 @@ if($ENV{ROS_VERSION} EQUAL 1)
     roscpp
     rospy
   )
-else()
-  find_package(ament_cmake REQUIRED COMPONENTS
-    rclcpp
-    rclpy
-  )
-endif()
-
-if($ENV{ROS_VERSION} EQUAL 1)
+  
   catkin_package(
     INCLUDE_DIRS
     LIBRARIES ${PROJECT_NAME}
@@ -37,10 +30,7 @@ if($ENV{ROS_VERSION} EQUAL 1)
     roscpp
     rospy
   )
-endif()
-
-# Install Python scripts for both ROS 1
-if($ENV{ROS_VERSION} EQUAL 1)
+  
   catkin_install_python(
     PROGRAMS
     src/bellande_2d_computer_vision_prediction.py
@@ -50,24 +40,52 @@ if($ENV{ROS_VERSION} EQUAL 1)
     src/bellande_2d_computer_vision_semantic_segmentation.py
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
-endif()
-
-# Install Python scripts, configuration files, and launch files
-if($ENV{ROS_VERSION} EQUAL "1")
-    install(PROGRAMS src/bellande_2d_computer_vision_prediction.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
-    install(PROGRAMS src/bellande_2d_computer_vision_face_detection.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
-    install(PROGRAMS src/bellande_2d_computer_vision_object_detection.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
-    install(PROGRAMS src/bellande_2d_computer_vision_instance_segmentation.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
-    install(PROGRAMS src/bellande_2d_computer_vision_semantic_segmentation.py DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
-    install(DIRECTORY config/ DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config)
-    install(DIRECTORY launch/ DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch)
+  
+  install(
+    PROGRAMS 
+    src/bellande_2d_computer_vision_prediction.py
+    src/bellande_2d_computer_vision_face_detection.py
+    src/bellande_2d_computer_vision_object_detection.py
+    src/bellande_2d_computer_vision_instance_segmentation.py
+    src/bellande_2d_computer_vision_semantic_segmentation.py
+    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  )
+  
+  install(
+    DIRECTORY config/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
+  )
+  
+  install(
+    DIRECTORY launch/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+  )
+  
 else()
-    install(PROGRAMS src/bellande_2d_computer_vision_prediction.py DESTINATION lib/${PROJECT_NAME})
-    install(PROGRAMS src/bellande_2d_computer_vision_face_detection.py DESTINATION lib/${PROJECT_NAME})
-    install(PROGRAMS src/bellande_2d_computer_vision_object_detection.py DESTINATION lib/${PROJECT_NAME})
-    install(PROGRAMS src/bellande_2d_computer_vision_instance_segmentation.py DESTINATION lib/${PROJECT_NAME})
-    install(PROGRAMS src/bellande_2d_computer_vision_semantic_segmentation.py DESTINATION lib/${PROJECT_NAME})
-    install(DIRECTORY config/ DESTINATION share/${PROJECT_NAME}/config)
-    install(DIRECTORY launch/ DESTINATION share/${PROJECT_NAME}/launch)
-    ament_package()
+  find_package(ament_cmake REQUIRED)
+  find_package(ament_cmake_python REQUIRED)
+  find_package(rclcpp REQUIRED)
+  find_package(rclpy REQUIRED)
+  
+  install(
+    PROGRAMS 
+    src/bellande_2d_computer_vision_prediction.py
+    src/bellande_2d_computer_vision_face_detection.py
+    src/bellande_2d_computer_vision_object_detection.py
+    src/bellande_2d_computer_vision_instance_segmentation.py
+    src/bellande_2d_computer_vision_semantic_segmentation.py
+    DESTINATION lib/${PROJECT_NAME}
+  )
+  
+  install(
+    DIRECTORY config/
+    DESTINATION share/${PROJECT_NAME}/config
+  )
+  
+  install(
+    DIRECTORY launch/
+    DESTINATION share/${PROJECT_NAME}/launch
+  )
+  
+  ament_package()
 endif()
