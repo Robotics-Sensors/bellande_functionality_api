@@ -58,8 +58,6 @@ else()
   find_package(rclcpp REQUIRED)
   find_package(rclpy REQUIRED)
   
-  ament_python_install_package(${PROJECT_NAME})
-  
   install(
     PROGRAMS src/bellande_limit_api.py
     DESTINATION lib/${PROJECT_NAME}

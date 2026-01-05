@@ -37,6 +37,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
+  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake_python</buildtool_depend>
 
   <build_depend condition="$ROS_VERSION == 2">rclcpp</build_depend>
   <build_depend condition="$ROS_VERSION == 2">rclpy</build_depend>
@@ -47,7 +48,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <exec_depend condition="$ROS_VERSION == 2">rclcpp</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">rclpy</exec_depend>
 
-
   <export>
+    <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
+    <build_type condition="$ROS_VERSION == 2">ament_cmake_python</build_type>
   </export>
+
 </package>
