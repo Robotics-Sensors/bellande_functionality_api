@@ -20,7 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <name>web_api_bellande_step</name>
   <version>0.0.1</version>
   <description>
-    Bellande ROS/ROS2 package with a JSON config file for making HTTP requests
+    Bellande ROS/ROS2 package with a JSON config file for making HTTP requests for Bellande Step
   </description>
   <author email="ronaldsonbellande@gmail.com">Ronaldson Bellande</author>
   <maintainer email="ronaldsonbellande@gmail.com">Ronaldson Bellande</maintainer>
@@ -53,7 +53,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
   <export>
     <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
-    <build_type condition="$ROS_VERSION == 2">ament_cmake_python</build_type>
   </export>
 
 </package>

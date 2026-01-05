@@ -17,36 +17,28 @@ cmake_minimum_required(VERSION 3.8)
 project(web_api_bellande_step)
 
 # Find ROS
-if($ENV{ROS_VERSION} EQUAL 1)
+if("$ENV{ROS_VERSION}" STREQUAL "1")
   find_package(catkin REQUIRED COMPONENTS
     roscpp
     rospy
   )
   
+  # This enables Python package installation via setup.py
+  catkin_python_setup()
+  
   catkin_package(
-    INCLUDE_DIRS
-    LIBRARIES ${PROJECT_NAME}
     CATKIN_DEPENDS
-    roscpp
-    rospy
+      roscpp
+      rospy
   )
   
-  catkin_install_python(
-    PROGRAMS
-    src/bellande_step_api.py
-    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-  )
-  
-  install(
-    PROGRAMS src/bellande_step_api.py
-    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  )
-  
+  # Install config files
   install(
     DIRECTORY config/
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
   )
   
+  # Install launch files
   install(
     DIRECTORY launch/
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
@@ -58,16 +50,19 @@ else()
   find_package(rclcpp REQUIRED)
   find_package(rclpy REQUIRED)
   
+  # Install Python scripts directly (setup.py handles entry points)
   install(
     PROGRAMS src/bellande_step_api.py
     DESTINATION lib/${PROJECT_NAME}
   )
   
+  # Install config files
   install(
     DIRECTORY config/
     DESTINATION share/${PROJECT_NAME}/config
   )
   
+  # Install launch files
   install(
     DIRECTORY launch/
     DESTINATION share/${PROJECT_NAME}/launch
