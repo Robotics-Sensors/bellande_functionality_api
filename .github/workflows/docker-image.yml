@@ -20,4 +20,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image ROS2
-      run: docker build . --file ./docker/Dockerfile.ros1 --tag my-image-name:$(date +%s)
+      run: docker build . --file ./docker/Dockerfile.ros2 --tag my-image-name:$(date +%s)
