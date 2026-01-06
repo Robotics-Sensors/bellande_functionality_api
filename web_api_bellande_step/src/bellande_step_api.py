@@ -40,7 +40,9 @@ def get_next_step(x1, y1, x2, y2, limit):
         response = requests.post(api_url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
-        return String(f"Next Step: {data['next_step']}")
+
+        return data["next_step"]
+
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
         return None
@@ -55,7 +57,7 @@ def parameter_callback_ros1(event):
     limit = rospy.get_param("limit", 3)
 
     next_step = get_next_step(x1, y1, x2, y2, limit)
-    if next_step:
+    if next_step is not None:
         pub.publish(next_step)
 
 
@@ -68,7 +70,7 @@ def parameter_callback_ros2():
     limit = node.get_parameter("limit").value
 
     next_step = get_next_step(x1, y1, x2, y2, limit)
-    if next_step:
+    if next_step is not None:
         pub.publish(next_step)
 
 
@@ -155,6 +157,7 @@ def main():
             rospy.spin()
         elif ros_version == "2":
             rclpy.spin(node)
+        print("HEREE")
     except KeyboardInterrupt:
         print("Shutting down next step node.")
     except Exception as e:
@@ -163,6 +166,8 @@ def main():
         if ros_version == "2":
             node.destroy_node()
             rclpy.shutdown()
+
+    print("HERE")
 
 
 if __name__ == "__main__":
