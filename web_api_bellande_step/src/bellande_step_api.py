@@ -20,6 +20,9 @@ import os
 import requests
 from std_msgs.msg import String
 
+# Import Message
+from web_api_bellande_step.msg import NextStep2D
+
 
 # Config for Step Node
 def get_next_step(x1, y1, x2, y2, limit):
@@ -58,7 +61,12 @@ def parameter_callback_ros1(event):
 
     next_step = get_next_step(x1, y1, x2, y2, limit)
     if next_step is not None:
-        pub.publish(next_step)
+        # Message Initialize
+        msg = NextStep2D()
+        msg.x = next_step[0]
+        msg.y = next_step[1]
+
+        pub.publish(msg)
 
 
 def parameter_callback_ros2():
@@ -71,7 +79,12 @@ def parameter_callback_ros2():
 
     next_step = get_next_step(x1, y1, x2, y2, limit)
     if next_step is not None:
-        pub.publish(next_step)
+        # Message Initialize
+        msg = NextStep2D()
+        msg.x = next_step[0]
+        msg.y = next_step[1]
+
+        pub.publish(msg)
 
 
 def node_initialize_ros1():

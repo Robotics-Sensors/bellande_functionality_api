@@ -44,12 +44,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
   <build_depend condition="$ROS_VERSION == 2">rclcpp</build_depend>
   <build_depend condition="$ROS_VERSION == 2">rclpy</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">rosidl_default_generators</build_depend>
 
   <build_export_depend condition="$ROS_VERSION == 2">rclcpp</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">rclpy</build_export_depend>
 
   <exec_depend condition="$ROS_VERSION == 2">rclcpp</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">rclpy</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">rosidl_default_runtime</exec_depend>
+
+  <member_of_group condition="$ROS_VERSION == 2">rosidl_interface_packages</member_of_group>
 
   <export>
     <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>

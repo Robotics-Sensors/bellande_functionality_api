@@ -23,6 +23,11 @@ if("$ENV{ROS_VERSION}" STREQUAL "1")
     rospy
   )
   
+  add_message_files(
+    FILES
+    NextStep2D.msg
+  )
+
   # This enables Python package installation via setup.py
   catkin_python_setup()
   
@@ -49,13 +54,18 @@ else()
   find_package(ament_cmake_python REQUIRED)
   find_package(rclcpp REQUIRED)
   find_package(rclpy REQUIRED)
+  find_package(rosidl_default_generators REQUIRED)
   
+  rosidl_generate_interfaces(${PROJECT_NAME}
+    "msg/NextStep2D.msg"
+  )
+
   # Install Python scripts directly (setup.py handles entry points)
   install(
     PROGRAMS src/bellande_step_api.py
     DESTINATION lib/${PROJECT_NAME}
   )
-  
+
   # Install config files
   install(
     DIRECTORY config/
