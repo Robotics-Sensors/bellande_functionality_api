@@ -41,6 +41,12 @@ elif ros_version == "2":
         packages=[],
         package_dir={"": "src"},
         py_modules=["bellande_step_api"],
+        data_files=[
+            (
+                os.path.join("share", "web_api_bellande_step", "config", "json"),
+                ["config/json/http_configs.json"],
+            ),
+        ],
         install_requires=[
             "setuptools",
         ],
