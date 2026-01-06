@@ -21,19 +21,23 @@ import requests
 from std_msgs.msg import String
 
 
+# Config for Step Node
 def get_next_step(x1, y1, x2, y2, limit):
-    payload = {"node0": {"x": x1, "y": y1}, "node1": {"x": x2, "y": y2}}
+    payload = {
+        "node0": [x1, y1, 0],
+        "node1": [x2, y2, 0],
+        "limit": limit,
+        "dimensions": 2,
+        "auth": {"authorization_key": api_access_key},
+    }
 
     headers = {
         "accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_access_key}",
     }
 
     try:
-        response = requests.post(
-            f"{api_url}?limit={limit}", json=payload, headers=headers
-        )
+        response = requests.post(api_url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
         return String(f"Next Step: {data['next_step']}")
@@ -66,6 +70,33 @@ def parameter_callback_ros2():
     next_step = get_next_step(x1, y1, x2, y2, limit)
     if next_step:
         pub.publish(next_step)
+
+
+def node_initialize_ros1():
+    rospy.init_node("next_step_node", anonymous=True)
+    pub = rospy.Publisher("next_step_result", String, queue_size=10)
+    rospy.Timer(
+        rospy.Duration(10), parameter_callback_ros1
+    )  # Check parameters every 10 second
+
+    return pub
+
+
+def node_initialize_ros2():
+    rclpy.init()
+    node = rclpy.create_node("next_step_node")
+
+    # Declare parameters for ROS 2
+    node.declare_parameter("x1", 0)
+    node.declare_parameter("y1", 0)
+    node.declare_parameter("x2", 0)
+    node.declare_parameter("y2", 0)
+    node.declare_parameter("limit", 3)
+
+    pub = node.create_publisher(String, "next_step_result", 10)
+    node.create_timer(10.0, parameter_callback_ros2)  # Check parameters every 10 second
+
+    return node, pub
 
 
 def get_config_file_path():
@@ -109,28 +140,14 @@ def main():
         endpoint_path = config["endpoint_path"]["bellande_step"]
         api_access_key = config["Bellande_Framework_Access_Key"]
 
+    # API URL
+    api_url = f"{url}{endpoint_path}"
+
     # Initialize ROS node
     if ros_version == "1":
-        rospy.init_node("next_step_node", anonymous=True)
-        pub = rospy.Publisher("next_step_result", String, queue_size=10)
-        rospy.Timer(
-            rospy.Duration(1), parameter_callback_ros1
-        )  # Check parameters every second
+        pub = node_initialize_ros1()
     elif ros_version == "2":
-        rclpy.init()
-        node = rclpy.create_node("next_step_node")
-
-        # Declare parameters for ROS 2
-        node.declare_parameter("x1", 0)
-        node.declare_parameter("y1", 0)
-        node.declare_parameter("x2", 0)
-        node.declare_parameter("y2", 0)
-        node.declare_parameter("limit", 3)
-
-        pub = node.create_publisher(String, "next_step_result", 10)
-        node.create_timer(1.0, parameter_callback_ros2)  # Check parameters every second
-
-    api_url = f"{url}{endpoint_path}"
+        node, pub = node_initialize_ros2()
 
     try:
         print("Next step node is running. Ctrl+C to exit.")
