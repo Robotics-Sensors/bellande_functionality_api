@@ -15,25 +15,36 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
+
 <package format="3">
   <name>web_api_bellande_limit</name>
   <version>0.0.1</version>
-  <description>Bellande ROS/ROS2 package with a JSON config file for making HTTP requests</description>
-  <author email="ronaldsonbellande@gmail.com">Ronaldson Bellande</author>
-  <maintainer email="ronaldsonbellande@gmail.com">Ronaldson Bellande</maintainer>
-  <license>GNU General Public License v3.0</license>
-
-
+  <description>
+    Bellande ROS/ROS2 package with a JSON config file for making HTTP requests for Bellande Limit
+  </description>
+  <author email="ronaldsonbellande@gmail.com">Ronaldson Bellande
+  </author>
+    <maintainer email="ronaldsonbellande@gmail.com">Ronaldson Bellande
+  </maintainer>
+    <license>GPL-3.0
+  </license>
+  
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
 
   <build_depend condition="$ROS_VERSION == 1">roscpp</build_depend>
   <build_depend condition="$ROS_VERSION == 1">rospy</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">std_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">message_runtime</build_depend>
 
   <build_export_depend condition="$ROS_VERSION == 1">roscpp</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 1">rospy</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">std_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">message_runtime</build_export_depend>
 
   <exec_depend condition="$ROS_VERSION == 1">roscpp</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">rospy</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">std_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">message_runtime</exec_depend>
 
 
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
@@ -41,16 +52,22 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
   <build_depend condition="$ROS_VERSION == 2">rclcpp</build_depend>
   <build_depend condition="$ROS_VERSION == 2">rclpy</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">std_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">rosidl_default_generators</build_depend>
 
   <build_export_depend condition="$ROS_VERSION == 2">rclcpp</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">rclpy</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">std_msgs</build_export_depend>
 
   <exec_depend condition="$ROS_VERSION == 2">rclcpp</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">rclpy</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">std_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">rosidl_default_runtime</exec_depend>
+
+  <member_of_group condition="$ROS_VERSION == 2">rosidl_interface_packages</member_of_group>
 
   <export>
     <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
-    <build_type condition="$ROS_VERSION == 2">ament_cmake_python</build_type>
   </export>
 
 </package>
