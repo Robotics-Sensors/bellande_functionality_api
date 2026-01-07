@@ -18,7 +18,6 @@
 import json
 import os
 import requests
-from std_msgs.msg import String
 
 # Import Message
 from web_api_bellande_step.msg import NextStep2D
@@ -89,7 +88,7 @@ def parameter_callback_ros2():
 
 def node_initialize_ros1():
     rospy.init_node("next_step_node", anonymous=True)
-    pub = rospy.Publisher("next_step_result", String, queue_size=10)
+    pub = rospy.Publisher("next_step_result", NextStep2D, queue_size=10)
     rospy.Timer(
         rospy.Duration(10), parameter_callback_ros1
     )  # Check parameters every 10 second
@@ -108,7 +107,7 @@ def node_initialize_ros2():
     node.declare_parameter("y2", 0)
     node.declare_parameter("limit", 3)
 
-    pub = node.create_publisher(String, "next_step_result", 10)
+    pub = node.create_publisher(NextStep2D, "next_step_result", 10)
     node.create_timer(10.0, parameter_callback_ros2)  # Check parameters every 10 second
 
     return node, pub

@@ -16,16 +16,32 @@
 cmake_minimum_required(VERSION 3.8)
 project(web_api_bellande_step)
 
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
 # Find ROS
 if("$ENV{ROS_VERSION}" STREQUAL "1")
   find_package(catkin REQUIRED COMPONENTS
     roscpp
     rospy
+    std_msgs
+    message_generation
   )
   
   add_message_files(
     FILES
     NextStep2D.msg
+  )
+
+  # Generate messages
+  generate_messages(
+    DEPENDENCIES
+    std_msgs
   )
 
   # This enables Python package installation via setup.py
@@ -35,6 +51,8 @@ if("$ENV{ROS_VERSION}" STREQUAL "1")
     CATKIN_DEPENDS
       roscpp
       rospy
+      std_msgs
+      message_runtime
   )
   
   # Install config files
@@ -54,12 +72,16 @@ else()
   find_package(ament_cmake_python REQUIRED)
   find_package(rclcpp REQUIRED)
   find_package(rclpy REQUIRED)
+  find_package(std_msgs REQUIRED)
   find_package(rosidl_default_generators REQUIRED)
   
   rosidl_generate_interfaces(${PROJECT_NAME}
     "msg/NextStep2D.msg"
+    DEPENDENCIES std_msgs
   )
 
+  rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+  
   # Install Python scripts directly (setup.py handles entry points)
   install(
     PROGRAMS src/bellande_step_api.py
@@ -78,5 +100,7 @@ else()
     DESTINATION share/${PROJECT_NAME}/launch
   )
   
+  ament_export_dependencies(rosidl_default_runtime)
+
   ament_package()
 endif()
