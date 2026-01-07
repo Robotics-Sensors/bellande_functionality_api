@@ -169,7 +169,6 @@ def main():
             rospy.spin()
         elif ros_version == "2":
             rclpy.spin(node)
-        print("HEREE")
     except KeyboardInterrupt:
         print("Shutting down next step node.")
     except Exception as e:
@@ -178,8 +177,6 @@ def main():
         if ros_version == "2":
             node.destroy_node()
             rclpy.shutdown()
-
-    print("HERE")
 
 
 if __name__ == "__main__":
