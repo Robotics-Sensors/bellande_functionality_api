@@ -111,8 +111,8 @@ def parameter_callback_ros2():
 
 
 def node_initialize_ros1():
-    rospy.init_node("next_step_node", anonymous=True)
-    pub = rospy.Publisher("next_step_result", Limit2D, queue_size=10)
+    rospy.init_node("limit_node", anonymous=True)
+    pub = rospy.Publisher("limit_result", Limit2D, queue_size=10)
     rospy.Timer(
         rospy.Duration(10), parameter_callback_ros1
     )  # Check parameters every 10 second
@@ -122,7 +122,7 @@ def node_initialize_ros1():
 
 def node_initialize_ros2():
     rclpy.init()
-    node = rclpy.create_node("next_step_node")
+    node = rclpy.create_node("limit_node")
 
     # Declare parameters for ROS 2
     node.declare_parameter("x1", 0)
@@ -142,7 +142,7 @@ def node_initialize_ros2():
     node.declare_parameter("sr", 0)
     node.declare_parameter("sp", 0)
 
-    pub = node.create_publisher(Limit2D, "next_step_result", 10)
+    pub = node.create_publisher(Limit2D, "limit_result", 10)
     node.create_timer(10.0, parameter_callback_ros2)  # Check parameters every 10 second
 
     return node, pub
@@ -155,7 +155,7 @@ def get_config_file_path():
         import rospkg
 
         rospack = rospkg.RosPack()
-        package_path = rospack.get_path("web_api_bellande_step")
+        package_path = rospack.get_path("web_api_bellande_limit")
         config_file_path = os.path.join(
             package_path, "config", "json", "http_configs.json"
         )
@@ -163,7 +163,7 @@ def get_config_file_path():
         # ROS 2: Use ament_index to find package share directory
         from ament_index_python.packages import get_package_share_directory
 
-        package_share_directory = get_package_share_directory("web_api_bellande_step")
+        package_share_directory = get_package_share_directory("web_api_bellande_limit")
         config_file_path = os.path.join(
             package_share_directory, "config", "json", "http_configs.json"
         )
@@ -186,7 +186,7 @@ def main():
     with open(config_file_path, "r") as config_file:
         config = json.load(config_file)
         url = config["url"]
-        endpoint_path = config["endpoint_path"]["bellande_step"]
+        endpoint_path = config["endpoint_path"]["bellande_limit"]
         api_access_key = config["Bellande_Framework_Access_Key"]
 
     # API URL
@@ -212,8 +212,6 @@ def main():
         if ros_version == "2":
             node.destroy_node()
             rclpy.shutdown()
-
-    print("HERE")
 
 
 if __name__ == "__main__":
