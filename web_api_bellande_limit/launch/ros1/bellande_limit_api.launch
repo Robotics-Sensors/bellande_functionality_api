@@ -15,19 +15,42 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
+
 <launch>
   <arg name="x1" />
   <arg name="y1" />
   <arg name="x2" />
   <arg name="y2" />
-  <arg name="limit" />
+  <arg name="e1" />
+  <arg name="e2" />
+  <arg name="s1" />
+  <arg name="s2" />
+  <arg name="g1" />
+  <arg name="g2" />
+  <arg name="p1" />
+  <arg name="p2" />
+  <arg name="d1" />
+  <arg name="d2" />
+  <arg name="sr" />
+  <arg name="sp" />
 
-  <node pkg="web_api_bellande_step" type="bellande_step_api_2d.py"
-    name="bellande_step_api_2d_node" output="screen">
+  <node pkg="web_api_bellande_limit" type="bellande_limit_api_2d.py"
+    name="bellande_limit_api_2d_node" output="screen">
     <param name="x1" value="$(arg x1)" />
     <param name="y1" value="$(arg y1)" />
     <param name="x2" value="$(arg x2)" />
     <param name="y2" value="$(arg y2)" />
-    <param name="limit" value="$(arg limit)" />
+    <param name="e1" value="$(arg e1)" />
+    <param name="e2" value="$(arg e2)" />
+    <param name="s1" value="$(arg s1)" />
+    <param name="s2" value="$(arg s2)" />
+    <param name="g1" value="$(arg g1)" />
+    <param name="g2" value="$(arg g2)" />
+    <param name="p1" value="$(arg p1)" />
+    <param name="p2" value="$(arg p2)" />
+    <param name="d1" value="$(arg d1)" />
+    <param name="d2" value="$(arg d2)" />
+    <param name="sr" value="$(arg sr)" />
+    <param name="sp" value="$(arg sp)" />
   </node>
 </launch>
