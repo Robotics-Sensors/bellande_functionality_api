@@ -28,27 +28,24 @@ def get_limit(x1, y1, x2, y2, e1, e2, s1, s2, g1, g2, p1, p2, d1, d2, sr, sp):
     payload = {
         "node0": [x1, y1, 0],
         "node1": [x2, y2, 0],
-        "enviroment": [e1, e2, 0],
+        "environment": [e1, e2, 0],
         "size": [s1, s2, 0],
         "goal": [g1, g2, 0],
         "obstacles": [{"position": [p1, p2, 0], "dimensions": [d1, d2, 0]}],
-        "search_radius": [sr],
-        "sample_points": [sp],
+        "search_radius": sr,
+        "sample_points": sp,
         "auth": {"authorization_key": api_access_key},
     }
-
     headers = {
         "accept": "application/json",
         "Content-Type": "application/json",
     }
-
     try:
         response = requests.post(api_url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
 
         return data["limit"]
-
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
         return None
@@ -77,7 +74,7 @@ def parameter_callback_ros1(event):
     if limit is not None:
         # Message Initialize
         msg = Limit2D()
-        msg.l = limit[0]
+        msg.l = limit
 
         pub.publish(msg)
 
@@ -102,10 +99,11 @@ def parameter_callback_ros2():
     sp = node.get_parameter("sp").value
 
     limit = get_limit(x1, y1, x2, y2, e1, e2, s1, s2, g1, g2, p1, p2, d1, d2, sr, sp)
+
     if limit is not None:
         # Message Initialize
         msg = Limit2D()
-        msg.l = limit[0]
+        msg.l = limit
 
         pub.publish(msg)
 
@@ -199,13 +197,13 @@ def main():
         node, pub = node_initialize_ros2()
 
     try:
-        print("Next step node is running. Ctrl+C to exit.")
+        print("Limit node is running. Ctrl+C to exit.")
         if ros_version == "1":
             rospy.spin()
         elif ros_version == "2":
             rclpy.spin(node)
     except KeyboardInterrupt:
-        print("Shutting down next step node.")
+        print("Shutting down next limit node.")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
     finally:
